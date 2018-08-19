@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "airbnb-base",
+    "plugin:vue/recommended"
+  ],
+  "plugins": [
+    "vue",
+    "jest"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest/globals": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module"
+  },
+  "rules": {
+    "import/prefer-default-export": 0,
+    "radix": 0
+  }
+}

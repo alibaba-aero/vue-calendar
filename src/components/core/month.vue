@@ -1,0 +1,203 @@
+<template>
+  <div class="vuec-month">
+    <div
+      :show="showTitle"
+      class="vuec-month-name">
+      <h2>{{ title || date.format('jMMMM') }}</h2>
+    </div>
+    <div class="vuec-week-nav vuec-7col">
+      <div
+        v-for="(wd, index) in weekDays"
+        :key="index"
+        class="col">
+        <div class="vuec-week-content">
+          {{ wd }}
+        </div>
+        <div class="vuec-week-placeholder"/>
+      </div>
+    </div>
+    <div class="vuec-month-content">
+      <div class="vuec-month-days vuec-7col">
+        <day-view
+          v-for="(day, i) in days"
+          :key="i"
+          :index="i"
+          :data="day.data"
+          :date="day.date"
+          :title="day.title"
+          :aria-hidden="day.hide"
+          :disabled="day.disabled"
+          :selectable="!day.disabled && selectable"
+          :selected="day.selected"
+          :day-view="dayView"
+          class="col"
+          @click="toggleDay"
+          @hover="$emit('hover', $event)"
+          @blur="$emit('blur', $event)"
+        />
+      </div>
+      <div class="vuec-month-placeholder"/>
+    </div>
+  </div>
+</template>
+
+<script>
+import moment from 'moment-jalaali';
+
+import DayView from './day.vue';
+import DefaultDayView from './default-day.vue';
+import { weekDays } from '../../utils';
+
+export default {
+  components: {
+    DayView,
+  },
+  props: {
+    date: {
+      type: Object,
+      required: true,
+    },
+    adapter: {
+      type: Function,
+      default: () => ({}),
+    },
+    selectable: {
+      type: Boolean,
+      default: false,
+    },
+    minDate: {
+      type: [Object, String],
+      default: null,
+    },
+    maxDate: {
+      type: [Object, String],
+      default: null,
+    },
+    selection: {
+      type: Array,
+      default: () => [],
+    },
+    showTitle: {
+      type: Boolean,
+      default: true,
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+    dayView: {
+      type: Object,
+      default: () => DefaultDayView,
+    },
+  },
+  data() {
+    return {
+      weekDays: weekDays(),
+    };
+  },
+  computed: {
+    days() {
+      const activeMonth = this.date.jMonth();
+      const monthKey = this.date.format('jYYYY/jMM');
+      // move to start of week if it's not
+      const date = moment(this.date).startOf('jMonth').startOf('week');
+      const end = moment(this.date).endOf('jMonth');
+
+      const days = [];
+      while (date <= end) {
+        const dayKey = date.format('jYYYY/jMM/jDD');
+        if ((this.minDate && date.isBefore(this.minDate, 'day'))
+                    || (this.maxDate && date.isAfter(this.maxDate, 'day'))
+                    || (date.jMonth() !== activeMonth)) {
+          days.push({
+            disabled: true,
+            hide: date.jMonth() !== activeMonth,
+            date: moment(date),
+            data: this.adapter({
+              date,
+              dayKey,
+              monthKey,
+            }) || {},
+          });
+        } else {
+          days.push({
+            key: dayKey,
+            data: this.adapter({
+              date,
+              dayKey,
+              monthKey,
+            }) || {},
+            date: moment(date),
+            selected: this.selection.indexOf(dayKey) !== -1,
+          });
+        }
+
+        date.add(1, 'days');
+      }
+
+      return days;
+    },
+  },
+  methods: {
+    toggleDay(index) {
+      const day = this.days[index];
+      this.$emit('selectionChange', {
+        key: day.key,
+        date: day.date,
+        selected: !day.selected,
+      });
+    },
+  },
+};
+</script>
+
+<style lang="scss">
+.vuec-month {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    .vuec-month-name {
+        text-align: center;
+    }
+    .vuec-7col {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        .col {
+            max-width: 14.285714285714285714285714285714% !important;
+            flex: 1 1 14.28571%;
+        }
+    }
+    .vuec-week-nav {
+        text-align: center;
+        .col {
+          position: relative;
+        }
+        .vuec-week-placeholder {
+          padding-bottom: 100%;
+        }
+        .vuec-week-content {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+    }
+    .vuec-month-content {
+      position: relative;
+      .vuec-month-days {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+      .vuec-month-placeholder {
+        padding-bottom: calc(100% / 7 * 6);
+      }
+    }
+}
+</style>

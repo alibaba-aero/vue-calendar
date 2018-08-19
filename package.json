@@ -1,0 +1,40 @@
+{
+  "name": "vuec",
+  "version": "0.0.1",
+  "description": "Vue Calendar",
+  "main": "dist/vuec.cjs.min.js",
+  "web": "dist/vuec.min.js",
+  "module": "es/vuec.es.js",
+  "jsnext:main": "es/vuec.es.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nuxt dev demo",
+    "lint": "eslint --ext .js,.vue .",
+    "build": "cross-env NODE_ENV=production bili",
+    "prepublish": "npm run build"
+  },
+  "files": [
+    "src", 
+    "dist"
+  ],
+  "dependencies": {
+    "moment": "^2.22.2",
+    "moment-jalaali": "^0.7.4"
+  },
+  "devDependencies": {
+    "bili": "^3.1.2",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.1.0",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jest": "^21.17.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-vue": "^4.6.0",
+    "jest": "^23.1.0",
+    "node-sass": "^4.9.2",
+    "nuxt-edge": "^2.0.0-25555150.dbba872",
+    "rollup-plugin-postcss": "^1.6.2",
+    "rollup-plugin-vue": "2",
+    "sass-loader": "^7.1.0"
+  }
+}

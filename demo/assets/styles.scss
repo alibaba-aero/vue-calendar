@@ -1,0 +1,89 @@
+.vuec-theme-indra {
+    .vuec-day {
+        color: #979797;
+        &.disabled {
+            .vuec-day-content {
+                background: #f9f9f9;
+                border: none;
+            }
+        }
+        .vuec-day-content {
+            display: flex;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            height: calc(100% - 4px);
+            width: calc(100% - 4px);
+            border-radius: 3px;
+            border: 1px solid hsla(0,0%,59%,.7);
+        }
+
+        .vuec-default-day {
+            display: flex;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            // border: 2px solid transparent;
+        }
+        &:not(.disabled) {
+            cursor: pointer;
+            &.selected {
+                background: none;
+            }
+            &.highlight {
+                background: none;
+            }
+            &.selected .vuec-day-content,
+            &.highlight .vuec-day-content {
+                background-color: #ffdb99;
+                border-color: #ffedcc;
+            }
+            &.hover .vuec-day-content {
+                background-color: orange;
+                color: #fff;
+                text-decoration: none;
+                // border: 0;
+                &:before, &:after {
+                    display: none;
+                }
+            }
+            &.start .vuec-day-content,
+            &.end .vuec-day-content {
+                background-color: orange;
+                color: white;
+            }
+            &:before, &:after {
+                display: none;
+            }
+        }
+    }
+    .vuec-week-nav .col {
+        font-size: .75em;
+    }
+
+    .vuec-month-name {
+        h2 {
+            margin: 10px 0;
+        }
+    }
+
+    .vuec-nav {
+        position: relative;
+        .vuec-btn-prev, .vuec-btn-next {
+            position: absolute;
+            top: 0;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .vuec-btn-prev {
+            right: 0;
+            padding-right: 0;
+        }
+        .vuec-btn-next {
+            left: 0;
+            padding-left: 0;
+        }
+    }
+}

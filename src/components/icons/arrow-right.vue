@@ -1,0 +1,19 @@
+<template>
+  <svg
+    id="Layer_1"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    x="0px"
+    y="0px"
+    width="24px"
+    height="24px"
+    viewBox="0 0 24 24"
+    enable-background="new 0 0 24 24"
+    xml:space="preserve">
+    <path d="M8.59,16.59L13.17,12L8.59,7.41L10,6l6,6l-6,6L8.59,16.59z"/>
+    <path
+      fill="none"
+      d="M0,0h24v24H0V0z"/>
+  </svg>
+</template>
