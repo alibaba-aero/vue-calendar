@@ -1,5 +1,5 @@
 {
-  "name": "vuec",
+  "name": "@alibaba-aero/vuec",
   "version": "0.0.1",
   "description": "Vue Calendar",
   "main": "dist/vuec.cjs.min.js",
