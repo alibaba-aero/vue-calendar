@@ -23,9 +23,9 @@
 </template>
 
 <script>
-import moment from 'moment-jalaali';
 import VuecSingleSelect from './select-single.vue';
 import { formatDate } from '../utils';
+import { idate } from '../date';
 
 export default {
   components: {
@@ -69,8 +69,8 @@ export default {
     return {
       visible: this.open,
       temporaryDisableClickListen: false,
-      fromDate: moment(),
-      toDate: moment(),
+      fromDate: idate(),
+      toDate: idate(),
       dates: [],
     };
   },
@@ -107,8 +107,8 @@ export default {
       $event.stopPropagation();
     },
     onSelectionChange(selections) {
-      this.fromDate = moment(selections[0], 'jYYYY/jMM/jDD');
-      this.toDate = moment(selections[selections.length - 1], 'jYYYY/jMM/jDD');
+      this.fromDate = idate(selections[0], 'jYYYY/jMM/jDD');
+      this.toDate = idate(selections[selections.length - 1], 'jYYYY/jMM/jDD');
       this.$emit('input', [
         this.fromDate,
         this.toDate,

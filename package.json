@@ -14,10 +14,11 @@
     "prepublish": "npm run build"
   },
   "files": [
-    "src", 
+    "src",
     "dist"
   ],
   "dependencies": {
+    "dayjs": "^1.7.5",
     "moment": "^2.22.2",
     "moment-jalaali": "^0.7.4"
   },

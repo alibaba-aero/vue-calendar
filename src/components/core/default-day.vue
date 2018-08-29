@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { formatDate } from '../../utils';
+// import { formatDate } from '../../utils';
 
 export default {
   props: {
@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     formattedDate() {
-      return formatDate(this.date, 'jD', true);
+      return this.date.format('D'); // formatDate(this.date, 'D', true);
     },
   },
 };

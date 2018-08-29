@@ -26,7 +26,7 @@
             <icon-close/>
           </div>
         </div>
-        <vuec-range-select
+        <vuec-select-range
           :theme="theme"
           :value="dates"
           :min-date="minDate"
@@ -40,14 +40,14 @@
 </template>
 
 <script>
-import moment from 'moment-jalaali';
-import VuecRangeSelect from './select-range.vue';
+import VuecSelectRange from './select-range.vue';
 import { formatDate } from '../utils';
 import IconClose from './icons/close.vue';
+import { idate } from '../date';
 
 export default {
   components: {
-    VuecRangeSelect,
+    VuecSelectRange,
     IconClose,
   },
   props: {
@@ -97,15 +97,15 @@ export default {
     },
   },
   data() {
-    const [fromDate = moment(), toDate = moment()] = this.value;
+    const [fromDate = idate(), toDate = idate()] = this.value;
     return {
       visible: this.open,
       temporaryDisableClickListen: false,
       fromDate,
       toDate,
       dates: [
-        typeof fromDate === 'string' ? moment(fromDate, this.format) : moment(fromDate),
-        typeof toDate === 'string' ? moment(toDate, this.format) : moment(toDate),
+        typeof fromDate === 'string' ? idate(fromDate, this.format) : idate(fromDate),
+        typeof toDate === 'string' ? idate(toDate, this.format) : idate(toDate),
       ],
     };
   },
@@ -142,8 +142,8 @@ export default {
       $event.stopPropagation();
     },
     onSelectionChange(selections) {
-      this.fromDate = moment(selections[0], 'jYYYY/jMM/jDD');
-      this.toDate = moment(selections[selections.length - 1], 'jYYYY/jMM/jDD');
+      this.fromDate = idate(selections[0], 'jYYYY/jMM/jDD');
+      this.toDate = idate(selections[selections.length - 1], 'jYYYY/jMM/jDD');
       this.$emit('input', [
         this.fromDate,
         this.toDate,
