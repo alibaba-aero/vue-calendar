@@ -16,9 +16,8 @@
 </template>
 
 <script>
-import moment from 'moment';
-
 import { VuecRangeInput, VuecSingleInput } from '../../src';
+import date from '../../src/date';
 
 export default {
   components: {
@@ -27,8 +26,8 @@ export default {
   },
   data() {
     return {
-      now: moment(),
-      maxDate: moment().add(20, 'day'),
+      now: date(),
+      maxDate: date().add(26, 'day'),
     };
   },
 };

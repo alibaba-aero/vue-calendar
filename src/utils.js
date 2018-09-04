@@ -1,9 +1,3 @@
-import moment from 'moment-jalaali';
-
-moment.loadPersian({
-  dialect: 'persian-modern',
-});
-
 /**
  * Persian numeric characters
  */
@@ -46,33 +40,6 @@ export function toEnglishDigits(value) {
   return String(value)
     .replace(/[۰-۹]/g, w => w.charCodeAt(0) - PERSIAN_ZERO_CHAR_CODE)
     .replace(/[٠-٩]/g, w => w.charCodeAt(0) - ARABIC_ZERO_CHAR_CODE);
-}
-
-function getFormat(format) {
-  switch (format) {
-    case 'jalaliDateTime':
-      // This filter returns a Jalali date time format like : 12:31 1396/11/4
-      return 'HH:mm jYYYY/jM/jD';
-    case 'jalaliDate':
-      // This filter returns a Jalali date in the following format : 1396/11/4
-      return 'jYYYY/jM/jD';
-    default:
-      return format;
-  }
-}
-
-export function formatDate(date, format = 'jalaliDate', toPersian = true) {
-  let formattedDate = '';
-
-  if (date) {
-    formattedDate = moment(date).format(getFormat(format));
-  }
-
-  if (toPersian) {
-    formattedDate = toPersianDigits(formattedDate);
-  }
-
-  return formattedDate;
 }
 
 export function weekDays() {

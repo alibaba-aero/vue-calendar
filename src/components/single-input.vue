@@ -24,8 +24,7 @@
 
 <script>
 import VuecSingleSelect from './select-single.vue';
-import { formatDate } from '../utils';
-import { idate } from '../date';
+import idate from '../date';
 
 export default {
   components: {
@@ -76,7 +75,7 @@ export default {
   },
   computed: {
     formattedDates() {
-      return this.dates.map(date => formatDate(date));
+      return this.dates.map(date => date.format('YYYY/MM/DD'));
     },
   },
   watch: {
@@ -107,8 +106,8 @@ export default {
       $event.stopPropagation();
     },
     onSelectionChange(selections) {
-      this.fromDate = idate(selections[0], 'jYYYY/jMM/jDD');
-      this.toDate = idate(selections[selections.length - 1], 'jYYYY/jMM/jDD');
+      this.fromDate = idate(selections[0], 'YYYY/MM/DD');
+      this.toDate = idate(selections[selections.length - 1], 'YYYY/MM/DD');
       this.$emit('input', [
         this.fromDate,
         this.toDate,

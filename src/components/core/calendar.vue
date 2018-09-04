@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { idate } from '../../date';
+import idate from '../../date';
 
 import VuecMonth from './month.vue';
 import DefaultDayView from './default-day.vue';
@@ -104,7 +104,7 @@ export default {
   },
   data() {
     return {
-      now: idate(),
+      Xdate: this.date,
       dateUnderCursor: null,
     };
   },
@@ -127,13 +127,13 @@ export default {
     months() {
       const months = [];
 
-      let date = idate(this.date);
+      let date = idate(this.Xdate);
 
       if (this.showPreviousWeeks) {
         date.startOf('Month');
       }
 
-      const end = idate(this.date).add(this.visibleMonths - 1, 'Month').endOf('Month');
+      const end = idate(this.Xdate).add(this.visibleMonths - 1, 'Month').endOf('Month');
 
       while (date.isBefore(end)) {
         const monthKey = date.format('YYYY/MM');
@@ -147,6 +147,7 @@ export default {
         date = date.add(1, 'Month').startOf('Month');
       }
 
+      months.length = this.visibleMonths;
       return months;
     },
   },
@@ -168,12 +169,12 @@ export default {
       this.$emit('selectionChange', { date, selected });
     },
     previousPage() {
-      this.date = this.date.subtract(this.visibleMonths, 'Month').startOf('Month');
-      this.$emit('previous-page', this.date);
+      this.Xdate = this.Xdate.subtract(this.visibleMonths, 'Month').startOf('Month');
+      this.$emit('previous-page', this.Xdate);
     },
     nextPage() {
-      this.date = this.date.add(this.visibleMonths, 'Month').startOf('Month');
-      this.$emit('next-page', this.date);
+      this.Xdate = this.Xdate.add(this.visibleMonths, 'Month').startOf('Month');
+      this.$emit('next-page', this.Xdate);
     },
   },
 };

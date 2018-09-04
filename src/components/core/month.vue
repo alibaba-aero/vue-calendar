@@ -20,7 +20,7 @@
       <div class="vuec-month-days vuec-7col">
         <day-view
           v-for="(day, i) in days"
-          :key="i"
+          :key="day.dayKey"
           :index="i"
           :data="day.data"
           :date="day.date"
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { idate } from '../../date';
+import idate from '../../date';
 
 import DayView from './day.vue';
 import DefaultDayView from './default-day.vue';
@@ -104,6 +104,7 @@ export default {
       const end = idate(this.date).endOf('Month');
 
       const days = [];
+
       while (date.isBefore(end)) {
         const dayKey = date.format('YYYY/MM/DD');
         if ((this.minDate && date.isBefore(this.minDate, 'day'))

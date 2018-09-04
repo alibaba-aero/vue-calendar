@@ -3204,7 +3204,7 @@ date-time@^2.1.0:
   dependencies:
     time-zone "^1.0.0"
 
-dayjs@^1.7.5:
+dayjs@^1.6.3, dayjs@^1.7.5:
   version "1.7.5"
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.7.5.tgz#14715cb565d1f8cb556a8531cb14bf1fc33067cc"
 
@@ -5173,9 +5173,11 @@ istanbul-reports@^1.4.1:
   dependencies:
     handlebars "^4.0.11"
 
-jalaali-js@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/jalaali-js/-/jalaali-js-1.1.0.tgz#f0e942049273d11f7298a992356fc36ce2784863"
+jalaliday@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/jalaliday/-/jalaliday-1.0.0.tgz#8e757dbdb626700e0ad9213a3fb9870c1e182386"
+  dependencies:
+    dayjs "^1.6.3"
 
 jest-changed-files@^23.4.2:
   version "23.4.2"
@@ -6140,18 +6142,6 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
-
-moment-jalaali@^0.7.4:
-  version "0.7.4"
-  resolved "https://registry.yarnpkg.com/moment-jalaali/-/moment-jalaali-0.7.4.tgz#6878971d77c41d49270e61c18c7cb1e5d84528ee"
-  dependencies:
-    jalaali-js "^1.1.0"
-    moment "^2.22.1"
-    rimraf "^2.6.2"
-
-moment@^2.22.1, moment@^2.22.2:
-  version "2.22.2"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
 
 move-concurrently@^1.0.1:
   version "1.0.1"

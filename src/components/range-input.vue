@@ -9,7 +9,7 @@
     </div>
     <transition name="popup-animation">
       <div
-        v-show="visible"
+        v-if="visible"
         :class="{ mobile: mobile }"
         class="vuec-popup"
         @click="onClickDelegate"
@@ -41,9 +41,8 @@
 
 <script>
 import VuecSelectRange from './select-range.vue';
-import { formatDate } from '../utils';
 import IconClose from './icons/close.vue';
-import { idate } from '../date';
+import idate from '../date';
 
 export default {
   components: {
@@ -93,7 +92,7 @@ export default {
     },
     format: {
       type: String,
-      default: 'jYYYY/jMM/jDD',
+      default: 'YYYY/MM/DD',
     },
   },
   data() {
@@ -104,14 +103,14 @@ export default {
       fromDate,
       toDate,
       dates: [
-        typeof fromDate === 'string' ? idate(fromDate, this.format) : idate(fromDate),
-        typeof toDate === 'string' ? idate(toDate, this.format) : idate(toDate),
+        idate(fromDate),
+        idate(toDate),
       ],
     };
   },
   computed: {
     formattedDates() {
-      return this.dates.map(date => formatDate(date, this.format));
+      return this.dates.map(date => date.format(this.format));
     },
   },
   watch: {
@@ -142,8 +141,8 @@ export default {
       $event.stopPropagation();
     },
     onSelectionChange(selections) {
-      this.fromDate = idate(selections[0], 'jYYYY/jMM/jDD');
-      this.toDate = idate(selections[selections.length - 1], 'jYYYY/jMM/jDD');
+      this.fromDate = idate(selections[0]);
+      this.toDate = idate(selections[selections.length - 1]);
       this.$emit('input', [
         this.fromDate,
         this.toDate,
