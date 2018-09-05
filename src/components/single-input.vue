@@ -23,9 +23,8 @@
 </template>
 
 <script>
-import moment from 'moment-jalaali';
 import VuecSingleSelect from './select-single.vue';
-import { formatDate } from '../utils';
+import dayjs from '../date';
 
 export default {
   components: {
@@ -69,14 +68,14 @@ export default {
     return {
       visible: this.open,
       temporaryDisableClickListen: false,
-      fromDate: moment(),
-      toDate: moment(),
+      fromDate: dayjs(),
+      toDate: dayjs(),
       dates: [],
     };
   },
   computed: {
     formattedDates() {
-      return this.dates.map(date => formatDate(date));
+      return this.dates.map(date => date.format('YYYY/MM/DD'));
     },
   },
   watch: {
@@ -107,8 +106,8 @@ export default {
       $event.stopPropagation();
     },
     onSelectionChange(selections) {
-      this.fromDate = moment(selections[0], 'jYYYY/jMM/jDD');
-      this.toDate = moment(selections[selections.length - 1], 'jYYYY/jMM/jDD');
+      this.fromDate = dayjs(selections[0], 'YYYY/MM/DD');
+      this.toDate = dayjs(selections[selections.length - 1], 'YYYY/MM/DD');
       this.$emit('input', [
         this.fromDate,
         this.toDate,

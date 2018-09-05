@@ -3,7 +3,7 @@
     <div
       :show="showTitle"
       class="vuec-month-name">
-      <h2>{{ title || date.format('jMMMM') }}</h2>
+      <h2>{{ title || date.format('MMMM') }}</h2>
     </div>
     <div class="vuec-week-nav vuec-7col">
       <div
@@ -20,7 +20,7 @@
       <div class="vuec-month-days vuec-7col">
         <day-view
           v-for="(day, i) in days"
-          :key="i"
+          :key="day.dayKey"
           :index="i"
           :data="day.data"
           :date="day.date"
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import moment from 'moment-jalaali';
+import dayjs from '../../date';
 
 import DayView from './day.vue';
 import DefaultDayView from './default-day.vue';
@@ -97,22 +97,23 @@ export default {
   },
   computed: {
     days() {
-      const activeMonth = this.date.jMonth();
-      const monthKey = this.date.format('jYYYY/jMM');
+      const activeMonth = this.date.month();
+      const monthKey = this.date.format('YYYY/MM');
       // move to start of week if it's not
-      const date = moment(this.date).startOf('jMonth').startOf('week');
-      const end = moment(this.date).endOf('jMonth');
+      let date = dayjs(this.date).startOf('Month').startOf('week');
+      const end = dayjs(this.date).endOf('Month');
 
       const days = [];
-      while (date <= end) {
-        const dayKey = date.format('jYYYY/jMM/jDD');
+
+      while (date.isBefore(end)) {
+        const dayKey = date.format('YYYY/MM/DD');
         if ((this.minDate && date.isBefore(this.minDate, 'day'))
                     || (this.maxDate && date.isAfter(this.maxDate, 'day'))
-                    || (date.jMonth() !== activeMonth)) {
+                    || (date.month() !== activeMonth)) {
           days.push({
             disabled: true,
-            hide: date.jMonth() !== activeMonth,
-            date: moment(date),
+            hide: date.month() !== activeMonth,
+            date: dayjs(date),
             data: this.adapter({
               date,
               dayKey,
@@ -127,12 +128,12 @@ export default {
               dayKey,
               monthKey,
             }) || {},
-            date: moment(date),
+            date: dayjs(date),
             selected: this.selection.indexOf(dayKey) !== -1,
           });
         }
 
-        date.add(1, 'days');
+        date = date.add(1, 'days');
       }
 
       return days;

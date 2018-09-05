@@ -1,3 +1,5 @@
+export { default as dayjs } from '../date';
+
 // Core components
 export { default as VuecCalendar } from './core/calendar.vue';
 export { default as VuecDay } from './core/day.vue';

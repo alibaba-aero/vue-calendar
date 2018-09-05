@@ -19,7 +19,7 @@ export default {
       const map = {};
 
       this.localSelection.forEach((item) => {
-        const month = item.format('jYYYY/jMM');
+        const month = item.format('YYYY/MM');
         map[month] = map[month] || [];
         map[month].push(item);
       });

@@ -9,7 +9,7 @@
     </div>
     <transition name="popup-animation">
       <div
-        v-show="visible"
+        v-if="visible"
         :class="{ mobile: mobile }"
         class="vuec-popup"
         @click="onClickDelegate"
@@ -26,7 +26,7 @@
             <icon-close/>
           </div>
         </div>
-        <vuec-range-select
+        <vuec-select-range
           :theme="theme"
           :value="dates"
           :min-date="minDate"
@@ -40,14 +40,13 @@
 </template>
 
 <script>
-import moment from 'moment-jalaali';
-import VuecRangeSelect from './select-range.vue';
-import { formatDate } from '../utils';
+import VuecSelectRange from './select-range.vue';
 import IconClose from './icons/close.vue';
+import dayjs from '../date';
 
 export default {
   components: {
-    VuecRangeSelect,
+    VuecSelectRange,
     IconClose,
   },
   props: {
@@ -93,25 +92,25 @@ export default {
     },
     format: {
       type: String,
-      default: 'jYYYY/jMM/jDD',
+      default: 'YYYY/MM/DD',
     },
   },
   data() {
-    const [fromDate = moment(), toDate = moment()] = this.value;
+    const [fromDate = dayjs(), toDate = dayjs()] = this.value;
     return {
       visible: this.open,
       temporaryDisableClickListen: false,
       fromDate,
       toDate,
       dates: [
-        typeof fromDate === 'string' ? moment(fromDate, this.format) : moment(fromDate),
-        typeof toDate === 'string' ? moment(toDate, this.format) : moment(toDate),
+        dayjs(fromDate),
+        dayjs(toDate),
       ],
     };
   },
   computed: {
     formattedDates() {
-      return this.dates.map(date => formatDate(date, this.format));
+      return this.dates.map(date => date.format(this.format));
     },
   },
   watch: {
@@ -142,8 +141,8 @@ export default {
       $event.stopPropagation();
     },
     onSelectionChange(selections) {
-      this.fromDate = moment(selections[0], 'jYYYY/jMM/jDD');
-      this.toDate = moment(selections[selections.length - 1], 'jYYYY/jMM/jDD');
+      this.fromDate = dayjs(selections[0]);
+      this.toDate = dayjs(selections[selections.length - 1]);
       this.$emit('input', [
         this.fromDate,
         this.toDate,

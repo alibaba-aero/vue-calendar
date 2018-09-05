@@ -1,11 +1,11 @@
 {
-  "name": "@alibaba-aero/vuec",
+  "name": "@alibaba-aero/vue-calendar",
   "version": "0.0.1",
   "description": "Vue Calendar",
   "main": "dist/vuec.cjs.min.js",
   "web": "dist/vuec.min.js",
-  "module": "es/vuec.es.js",
-  "jsnext:main": "es/vuec.es.js",
+  "module": "dist/vuec.es.js",
+  "jsnext:main": "dist/vuec.es.js",
   "license": "MIT",
   "scripts": {
     "dev": "nuxt dev demo",
@@ -14,12 +14,12 @@
     "prepublish": "npm run build"
   },
   "files": [
-    "src", 
+    "src",
     "dist"
   ],
   "dependencies": {
-    "moment": "^2.22.2",
-    "moment-jalaali": "^0.7.4"
+    "dayjs": "^1.7.5",
+    "jalaliday": "^1.1.0"
   },
   "devDependencies": {
     "bili": "^3.1.2",

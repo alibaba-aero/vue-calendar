@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import moment from 'moment-jalaali';
+import dayjs from '../../date';
 
 import VuecMonth from './month.vue';
 import DefaultDayView from './default-day.vue';
@@ -75,7 +75,7 @@ export default {
     },
     date: {
       type: Object,
-      default: () => moment(),
+      default: () => dayjs(),
     },
     visibleMonths: {
       type: Number,
@@ -104,19 +104,19 @@ export default {
   },
   data() {
     return {
-      now: moment(),
+      Xdate: this.date,
       dateUnderCursor: null,
     };
   },
   computed: {
     year() {
-      return this.date.format('jYYYY');
+      return this.date.format('YYYY');
     },
     monthSelections() {
       const map = {};
 
       this.selections.forEach((item) => {
-        const month = moment(item, 'jYYYY/jMM/jDD').format('jYYYY/jMM');
+        const month = dayjs(item, 'YYYY/MM/DD').format('YYYY/MM');
         map[month] = map[month] || [];
         map[month].push(item);
         return map;
@@ -127,26 +127,27 @@ export default {
     months() {
       const months = [];
 
-      let date = moment(this.date);
+      let date = dayjs(this.Xdate);
 
       if (this.showPreviousWeeks) {
-        date.startOf('jMonth');
+        date.startOf('Month');
       }
 
-      const end = moment(this.date).add(this.visibleMonths - 1, 'jMonth').endOf('jMonth');
+      const end = dayjs(this.Xdate).add(this.visibleMonths - 1, 'Month').endOf('Month');
 
-      while (date <= end) {
-        const monthKey = date.format('jYYYY/jMM');
+      while (date.isBefore(end)) {
+        const monthKey = date.format('YYYY/MM');
 
         months.push({
-          title: date.format('jMMMM'),
-          date: moment(date),
+          title: date.format('MMMM'),
+          date: dayjs(date),
           selections: this.monthSelections[monthKey],
         });
 
-        date = date.add(1, 'jMonth').startOf('jMonth');
+        date = date.add(1, 'Month').startOf('Month');
       }
 
+      months.length = this.visibleMonths;
       return months;
     },
   },
@@ -168,12 +169,12 @@ export default {
       this.$emit('selectionChange', { date, selected });
     },
     previousPage() {
-      this.date = this.date.subtract(this.visibleMonths, 'jMonth').startOf('jMonth');
-      this.$emit('previous-page', this.date);
+      this.Xdate = this.Xdate.subtract(this.visibleMonths, 'Month').startOf('Month');
+      this.$emit('previous-page', this.Xdate);
     },
     nextPage() {
-      this.date = this.date.add(this.visibleMonths, 'jMonth').startOf('jMonth');
-      this.$emit('next-page', this.date);
+      this.Xdate = this.Xdate.add(this.visibleMonths, 'Month').startOf('Month');
+      this.$emit('next-page', this.Xdate);
     },
   },
 };
