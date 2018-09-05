@@ -24,7 +24,7 @@
 
 <script>
 import VuecSingleSelect from './select-single.vue';
-import idate from '../date';
+import dayjs from '../date';
 
 export default {
   components: {
@@ -68,8 +68,8 @@ export default {
     return {
       visible: this.open,
       temporaryDisableClickListen: false,
-      fromDate: idate(),
-      toDate: idate(),
+      fromDate: dayjs(),
+      toDate: dayjs(),
       dates: [],
     };
   },
@@ -106,8 +106,8 @@ export default {
       $event.stopPropagation();
     },
     onSelectionChange(selections) {
-      this.fromDate = idate(selections[0], 'YYYY/MM/DD');
-      this.toDate = idate(selections[selections.length - 1], 'YYYY/MM/DD');
+      this.fromDate = dayjs(selections[0], 'YYYY/MM/DD');
+      this.toDate = dayjs(selections[selections.length - 1], 'YYYY/MM/DD');
       this.$emit('input', [
         this.fromDate,
         this.toDate,

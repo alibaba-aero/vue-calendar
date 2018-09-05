@@ -42,7 +42,7 @@
 <script>
 import VuecSelectRange from './select-range.vue';
 import IconClose from './icons/close.vue';
-import idate from '../date';
+import dayjs from '../date';
 
 export default {
   components: {
@@ -96,15 +96,15 @@ export default {
     },
   },
   data() {
-    const [fromDate = idate(), toDate = idate()] = this.value;
+    const [fromDate = dayjs(), toDate = dayjs()] = this.value;
     return {
       visible: this.open,
       temporaryDisableClickListen: false,
       fromDate,
       toDate,
       dates: [
-        idate(fromDate),
-        idate(toDate),
+        dayjs(fromDate),
+        dayjs(toDate),
       ],
     };
   },
@@ -141,8 +141,8 @@ export default {
       $event.stopPropagation();
     },
     onSelectionChange(selections) {
-      this.fromDate = idate(selections[0]);
-      this.toDate = idate(selections[selections.length - 1]);
+      this.fromDate = dayjs(selections[0]);
+      this.toDate = dayjs(selections[selections.length - 1]);
       this.$emit('input', [
         this.fromDate,
         this.toDate,

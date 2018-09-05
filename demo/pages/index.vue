@@ -17,7 +17,7 @@
 
 <script>
 import { VuecRangeInput, VuecSingleInput } from '../../src';
-import date from '../../src/date';
+import dayjs from '../../src/date';
 
 export default {
   components: {
@@ -26,8 +26,8 @@ export default {
   },
   data() {
     return {
-      now: date(),
-      maxDate: date().add(26, 'day'),
+      now: dayjs(),
+      maxDate: dayjs().add(26, 'day'),
     };
   },
 };

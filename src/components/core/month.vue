@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import idate from '../../date';
+import dayjs from '../../date';
 
 import DayView from './day.vue';
 import DefaultDayView from './default-day.vue';
@@ -100,8 +100,8 @@ export default {
       const activeMonth = this.date.month();
       const monthKey = this.date.format('YYYY/MM');
       // move to start of week if it's not
-      let date = idate(this.date).startOf('Month').startOf('week');
-      const end = idate(this.date).endOf('Month');
+      let date = dayjs(this.date).startOf('Month').startOf('week');
+      const end = dayjs(this.date).endOf('Month');
 
       const days = [];
 
@@ -113,7 +113,7 @@ export default {
           days.push({
             disabled: true,
             hide: date.month() !== activeMonth,
-            date: idate(date),
+            date: dayjs(date),
             data: this.adapter({
               date,
               dayKey,
@@ -128,7 +128,7 @@ export default {
               dayKey,
               monthKey,
             }) || {},
-            date: idate(date),
+            date: dayjs(date),
             selected: this.selection.indexOf(dayKey) !== -1,
           });
         }

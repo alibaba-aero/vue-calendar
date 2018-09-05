@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import idate from '../../date';
+import dayjs from '../../date';
 
 import VuecMonth from './month.vue';
 import DefaultDayView from './default-day.vue';
@@ -75,7 +75,7 @@ export default {
     },
     date: {
       type: Object,
-      default: () => idate(),
+      default: () => dayjs(),
     },
     visibleMonths: {
       type: Number,
@@ -116,7 +116,7 @@ export default {
       const map = {};
 
       this.selections.forEach((item) => {
-        const month = idate(item, 'YYYY/MM/DD').format('YYYY/MM');
+        const month = dayjs(item, 'YYYY/MM/DD').format('YYYY/MM');
         map[month] = map[month] || [];
         map[month].push(item);
         return map;
@@ -127,20 +127,20 @@ export default {
     months() {
       const months = [];
 
-      let date = idate(this.Xdate);
+      let date = dayjs(this.Xdate);
 
       if (this.showPreviousWeeks) {
         date.startOf('Month');
       }
 
-      const end = idate(this.Xdate).add(this.visibleMonths - 1, 'Month').endOf('Month');
+      const end = dayjs(this.Xdate).add(this.visibleMonths - 1, 'Month').endOf('Month');
 
       while (date.isBefore(end)) {
         const monthKey = date.format('YYYY/MM');
 
         months.push({
           title: date.format('MMMM'),
-          date: idate(date),
+          date: dayjs(date),
           selections: this.monthSelections[monthKey],
         });
 
