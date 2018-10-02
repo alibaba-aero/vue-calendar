@@ -35,7 +35,6 @@
           @blur="$emit('blur', $event)"
         >
           <template
-            v-if="$slots.day"
             slot="day"
             slot-scope="props">
 

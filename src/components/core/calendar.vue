@@ -44,7 +44,11 @@
 
           <slot
             v-bind="props"
-            name="day"/>
+            name="day">
+            <div class="vuec-default-day">
+              {{ props.date.format('D') }}
+            </div>
+          </slot>
 
         </template>
 
