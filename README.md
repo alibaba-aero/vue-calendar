@@ -1,4 +1,28 @@
-# Alibaba Calendar
+# Vue Calendar
+
+## Installation
+```
+yarn add @alibaba-aero/vue-calendar
+```
+
+## Usage
+```html
+<template>
+    <vuec-calendar/>
+</template>
+
+<script>
+import { VuecCalendar } from '@alibaba-aero/vue-calendar';
+// Import calendar styles
+import '@alibaba-aero/vue-calendar/dist/vue-calendar.min.css';
+
+export default {
+    components: {
+        VuecCalendar
+    }
+}
+</script>
+```
 
 ## Components
 
