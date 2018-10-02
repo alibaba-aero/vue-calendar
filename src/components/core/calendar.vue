@@ -33,11 +33,22 @@
         :selectable="selectable"
         :inventory="month.inventory"
         :selection="month.selections"
-        :day-view="dayView"
         @selectionChange="selectionChange"
         @hover="onHover"
         @blur="onBlur"
-      />
+      >
+
+        <template
+          slot="day"
+          slot-scope="props">
+
+          <slot
+            v-bind="props"
+            name="day"/>
+
+        </template>
+
+      </vuec-month>
     </div>
   </div>
 </template>
@@ -46,7 +57,6 @@
 import dayjs from '../../date';
 
 import VuecMonth from './month.vue';
-import DefaultDayView from './default-day.vue';
 import IconArrowLeft from '../icons/arrow-left.vue';
 import IconArrowRight from '../icons/arrow-right.vue';
 
@@ -92,10 +102,6 @@ export default {
     maxDate: {
       type: [Object, String],
       default: null,
-    },
-    dayView: {
-      type: Object,
-      default: () => DefaultDayView,
     },
     selections: {
       type: Array,

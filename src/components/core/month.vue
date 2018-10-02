@@ -29,12 +29,23 @@
           :disabled="day.disabled"
           :selectable="!day.disabled && selectable"
           :selected="day.selected"
-          :day-view="dayView"
           class="col"
           @click="toggleDay"
           @hover="$emit('hover', $event)"
           @blur="$emit('blur', $event)"
-        />
+        >
+          <template
+            v-if="$slots.day"
+            slot="day"
+            slot-scope="props">
+
+            <slot
+              v-bind="props"
+              name="day"/>
+
+          </template>
+
+        </day-view>
       </div>
       <div class="vuec-month-placeholder"/>
     </div>
@@ -45,7 +56,6 @@
 import dayjs from '../../date';
 
 import DayView from './day.vue';
-import DefaultDayView from './default-day.vue';
 import { weekDays } from '../../utils';
 
 export default {
@@ -84,10 +94,6 @@ export default {
     title: {
       type: String,
       default: '',
-    },
-    dayView: {
-      type: Object,
-      default: () => DefaultDayView,
     },
   },
   data() {

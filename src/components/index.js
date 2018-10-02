@@ -3,7 +3,6 @@ export { default as dayjs } from '../date';
 // Core components
 export { default as VuecCalendar } from './core/calendar.vue';
 export { default as VuecDay } from './core/day.vue';
-export { default as VuecDefaultDay } from './core/default-day.vue';
 export { default as VuecMonth } from './core/month.vue';
 
 // Wrapper components

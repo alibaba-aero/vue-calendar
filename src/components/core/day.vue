@@ -6,11 +6,17 @@
     @mouseout="$emit('blur', date)"
     @click="toggleSelection"
   >
-    <div
-      :is="dayView"
-      :data="data"
-      :date="date"
-      class="vuec-day-content"/>
+    <div class="vuec-day-content">
+      <slot
+        :is="dayView"
+        :data="data"
+        :date="date"
+        name="day">
+        <div class="vuec-default-day">
+          {{ date.format('D') }}
+        </div>
+      </slot>
+    </div>
     <div class="vuec-square-placeholder"/>
   </div>
 </template>
@@ -41,10 +47,6 @@ export default {
     selectable: {
       type: Boolean,
       default: false,
-    },
-    dayView: {
-      type: Object,
-      default: null,
     },
   },
   methods: {
