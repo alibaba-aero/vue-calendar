@@ -8,7 +8,6 @@
   >
     <div class="vuec-day-content">
       <slot
-        :is="dayView"
         :data="data"
         :date="date"
         name="day">
