@@ -143,9 +143,8 @@ export default {
         date.startOf('Month');
       }
 
-      const end = dayjs(this.Xdate).add(this.visibleMonths - 1, 'Month').endOf('Month');
-
-      while (date.isBefore(end)) {
+      let index = 0;
+      while (index < this.visibleMonths) {
         const monthKey = date.format('YYYY/MM');
 
         months.push({
@@ -155,9 +154,9 @@ export default {
         });
 
         date = date.add(1, 'Month').startOf('Month');
+        index += 1;
       }
 
-      months.length = this.visibleMonths;
       return months;
     },
   },
