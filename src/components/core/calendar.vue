@@ -37,7 +37,17 @@
         @hover="onHover"
         @blur="onBlur"
       >
+        <template
+          slot="day-of-week"
+          slot-scope="wd, index">
 
+          <slot
+            v-bind="wd, index"
+            name="day-of-week">
+            {{ wd }}
+          </slot>
+
+        </template>
         <template
           slot="day"
           slot-scope="props">

@@ -11,7 +11,11 @@
         :key="index"
         class="col">
         <div class="vuec-week-content">
-          {{ wd }}
+          <slot
+            v-bind="wd, index"
+            name="day-of-week">
+            {{ wd }}
+          </slot>
         </div>
         <div class="vuec-week-placeholder"/>
       </div>
