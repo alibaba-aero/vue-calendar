@@ -39,10 +39,9 @@
       >
         <template
           slot="day-of-week"
-          slot-scope="wd, index">
-
+          slot-scope="{wd, index}">
           <slot
-            v-bind="wd, index"
+            v-bind="{wd, index}"
             name="day-of-week">
             {{ wd }}
           </slot>

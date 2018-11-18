@@ -12,7 +12,7 @@
         class="col">
         <div class="vuec-week-content">
           <slot
-            v-bind="wd, index"
+            v-bind="{wd, index}"
             name="day-of-week">
             {{ wd }}
           </slot>
