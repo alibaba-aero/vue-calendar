@@ -120,10 +120,14 @@ export default {
       type: Array,
       default: () => [],
     },
+    monthTitleFormat: {
+      type: String,
+      default: 'MMMM',
+    },
   },
   data() {
     return {
-      Xdate: this.date,
+      localDate: this.date,
       dateUnderCursor: null,
     };
   },
@@ -146,7 +150,7 @@ export default {
     months() {
       const months = [];
 
-      let date = dayjs(this.Xdate);
+      let date = dayjs(this.localDate);
 
       if (this.showPreviousWeeks) {
         date.startOf('Month');
@@ -157,7 +161,7 @@ export default {
         const monthKey = date.format('YYYY/MM');
 
         months.push({
-          title: date.format('MMMM'),
+          title: date.format(this.monthTitleFormat),
           date: dayjs(date),
           selections: this.monthSelections[monthKey],
         });
@@ -167,6 +171,11 @@ export default {
       }
 
       return months;
+    },
+  },
+  watch: {
+    date(newDate) {
+      this.localDate = newDate;
     },
   },
   methods: {
@@ -187,12 +196,12 @@ export default {
       this.$emit('selectionChange', { date, selected });
     },
     previousPage() {
-      this.Xdate = this.Xdate.subtract(this.visibleMonths, 'Month').startOf('Month');
-      this.$emit('previous-page', this.Xdate);
+      this.localDate = this.localDate.subtract(this.visibleMonths, 'Month').startOf('Month');
+      this.$emit('previous-page', this.localDate);
     },
     nextPage() {
-      this.Xdate = this.Xdate.add(this.visibleMonths, 'Month').startOf('Month');
-      this.$emit('next-page', this.Xdate);
+      this.localDate = this.localDate.add(this.visibleMonths, 'Month').startOf('Month');
+      this.$emit('next-page', this.localDate);
     },
   },
 };
