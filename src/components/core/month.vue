@@ -110,7 +110,7 @@ export default {
       const monthKey = this.date.format('YYYY/MM');
       // move to start of week if it's not
       let date = dayjs(this.date).startOf('Month').startOf('week');
-      const end = dayjs(this.date).endOf('Month');
+      const end = dayjs(this.date).endOf('Month').endOf('week');
 
       const days = [];
 
