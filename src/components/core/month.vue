@@ -114,10 +114,13 @@ export default {
 
       const days = [];
 
+      const minDate = this.minDate ? dayjs(this.minDate).startOf('day') : null;
+      const maxDate = this.maxDate ? dayjs(this.maxDate).endOf('day') : null;
+
       while (date.isBefore(end)) {
         const dayKey = date.format('YYYY/MM/DD');
-        if ((this.minDate && date.isBefore(this.minDate, 'day'))
-                    || (this.maxDate && date.isAfter(this.maxDate, 'day'))
+        if ((minDate && date.isBefore(minDate))
+                    || (maxDate && date.isAfter(maxDate))
                     || (date.month() !== activeMonth)) {
           days.push({
             disabled: true,
