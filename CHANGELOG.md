@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/alibaba-aero/vue-calendar/compare/v0.3.1...v0.4.0) (2018-11-21)
+
+
+### Bug Fixes
+
+* **month:** render remaining days of lmonths last week ([b1327ec](https://github.com/alibaba-aero/vue-calendar/commit/b1327ec))
+
+
+### Features
+
+* **calendar:** add month title format prop ([e9458b1](https://github.com/alibaba-aero/vue-calendar/commit/e9458b1))
+
+
+
 <a name="0.3.1"></a>
 ## [0.3.1](https://github.com/alibaba-aero/vue-calendar/compare/v0.3.0...v0.3.1) (2018-11-18)
 
