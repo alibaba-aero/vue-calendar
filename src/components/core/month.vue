@@ -9,7 +9,7 @@
       <div
         v-for="(wd, index) in weekDays"
         :key="index"
-        class="col">
+        class="vuec-col">
         <div class="vuec-week-content">
           <slot
             v-bind="{wd, index}"
@@ -33,7 +33,7 @@
           :disabled="day.disabled"
           :selectable="!day.disabled && selectable"
           :selected="day.selected"
-          class="col"
+          class="vuec-col"
           @click="toggleDay"
           @hover="$emit('hover', $event)"
           @blur="$emit('blur', $event)"
@@ -176,14 +176,14 @@ export default {
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
-        .col {
+        .vuec-col {
             max-width: 14.285714285714285714285714285714% !important;
             flex: 1 1 14.28571%;
         }
     }
     .vuec-week-nav {
         text-align: center;
-        .col {
+        .vuec-col {
           position: relative;
         }
         .vuec-week-placeholder {
