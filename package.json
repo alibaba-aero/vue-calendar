@@ -1,6 +1,6 @@
 {
   "name": "@alibaba-aero/vue-calendar",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Vue Calendar",
   "main": "dist/vue-calendar.cjs.min.js",
   "web": "dist/vue-calendar.min.js",
@@ -11,7 +11,7 @@
     "dev": "nuxt dev demo",
     "lint": "eslint --ext .js,.vue .",
     "build": "cross-env NODE_ENV=production bili",
-    "release": "standard-version && git push --follow-tags && npm publish",
+    "release": "standard-version $* && git push --follow-tags && npm publish",
     "prepublish": "npm run build"
   },
   "files": [

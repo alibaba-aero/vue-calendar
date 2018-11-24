@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.1"></a>
+## [0.4.1](https://github.com/alibaba-aero/vue-calendar/compare/v0.4.0...v0.4.1) (2018-11-24)
+
+
+### Bug Fixes
+
+* **month:** calculate enable dates within min-date and max-date ([b933ede](https://github.com/alibaba-aero/vue-calendar/commit/b933ede))
+* **month.vue:** change vuec-7col columns class (prevent conflict with bootstrap) ([b1ce8a8](https://github.com/alibaba-aero/vue-calendar/commit/b1ce8a8))
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/alibaba-aero/vue-calendar/compare/v0.3.1...v0.4.0) (2018-11-21)
 
