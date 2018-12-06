@@ -41,15 +41,3 @@ export function toEnglishDigits(value) {
     .replace(/[۰-۹]/g, w => w.charCodeAt(0) - PERSIAN_ZERO_CHAR_CODE)
     .replace(/[٠-٩]/g, w => w.charCodeAt(0) - ARABIC_ZERO_CHAR_CODE);
 }
-
-export function weekDays() {
-  return [
-    'شنبه',
-    '۱ شنبه',
-    '۲ شنبه',
-    '۳ شنبه',
-    '۴ شنبه',
-    '۵ شنبه',
-    'جمعه',
-  ];
-}

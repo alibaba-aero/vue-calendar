@@ -7,14 +7,14 @@
     </div>
     <div class="vuec-week-nav vuec-7col">
       <div
-        v-for="(wd, index) in weekDays"
+        v-for="(name, index) in weekDays"
         :key="index"
         class="vuec-col">
         <div class="vuec-week-content">
           <slot
-            v-bind="{wd, index}"
+            v-bind="{ name, index, locale }"
             name="day-of-week">
-            {{ wd }}
+            {{ name }}
           </slot>
         </div>
         <div class="vuec-week-placeholder"/>
@@ -59,7 +59,6 @@
 import dayjs from '../../date';
 
 import DayView from './day.vue';
-import { weekDays } from '../../utils';
 
 export default {
   components: {
@@ -101,7 +100,8 @@ export default {
   },
   data() {
     return {
-      weekDays: weekDays(),
+      locale: this.date.$locale().name,
+      weekDays: this.date.$locale().weekdays,
     };
   },
   computed: {
