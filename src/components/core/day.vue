@@ -4,7 +4,7 @@
     class="vuec-day"
     @mouseover="$emit('hover', date)"
     @mouseout="$emit('blur', date)"
-    @click="toggleSelection"
+    @click="onClick"
   >
     <div class="vuec-day-content">
       <slot
@@ -49,7 +49,7 @@ export default {
     },
   },
   methods: {
-    toggleSelection() {
+    onClick() {
       if (this.selectable) {
         this.$emit('click', this.index);
       }
