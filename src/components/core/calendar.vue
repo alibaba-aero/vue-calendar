@@ -132,9 +132,6 @@ export default {
     };
   },
   computed: {
-    year() {
-      return this.date.format('YYYY');
-    },
     monthSelections() {
       const map = {};
 
