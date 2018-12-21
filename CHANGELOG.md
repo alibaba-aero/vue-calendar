@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/alibaba-aero/vue-calendar/compare/v0.4.1...v0.5.0) (2018-12-21)
+
+
+### Bug Fixes
+
+* **calendar:** remove unused computed value ([aa1763c](https://github.com/alibaba-aero/vue-calendar/commit/aa1763c))
+* improve support for gregory calendar ([3ad3c3c](https://github.com/alibaba-aero/vue-calendar/commit/3ad3c3c))
+
+
+### Features
+
+* Change default calendar from jalali to gregorian ([1620af4](https://github.com/alibaba-aero/vue-calendar/commit/1620af4))
+* localize week day names ([ad53e9b](https://github.com/alibaba-aero/vue-calendar/commit/ad53e9b))
+
+
+### BREAKING CHANGES
+
+* from now on vue-calendars default calendar is gregorian
+if you want to show jalali dates just create a dayjs object and change its calendar
+and pass this object as `date` props to vue-calendar
+`const date = dayjs().calendar('jalali')`
+for more information see jalaliday docs:
+https://www.npmjs.com/package/jalaliday
+
+
+
 <a name="0.4.1"></a>
 ## [0.4.1](https://github.com/alibaba-aero/vue-calendar/compare/v0.4.0...v0.4.1) (2018-11-24)
 
