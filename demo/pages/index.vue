@@ -1,16 +1,33 @@
 <template>
   <div>
     <div>
-      <h3>Range Input</h3>
-      <vuec-range-input
-        :min-date="now"
-        :max-date="maxDate"
-        :mobile="false"
-        theme="indra" />
+      <h2>Gregory</h2>
+      <div>
+        <h3>Range Input</h3>
+        <VuecRangeInput
+          :min-date="now"
+          :max-date="maxDate"
+          :mobile="false"
+          theme="orange"
+        />
+      </div>
+      <div>
+        <h3>Single Input</h3>
+        <VuecSingleInput />
+      </div>
     </div>
-    <div>
-      <h3>Single Input</h3>
-      <vuec-single-input/>
+    <div class="jalali">
+      <h2>Jalali</h2>
+      <div>
+        <h3>Range Input</h3>
+        <VuecRangeInput
+          :date="todayInJalali"
+          :min-date="now"
+          :max-date="maxDate"
+          :mobile="false"
+          theme="orange"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -27,8 +44,18 @@ export default {
   data() {
     return {
       now: dayjs(),
+      todayInJalali: dayjs().calendar('jalali').locale('fa'),
       maxDate: dayjs().add(26, 'day'),
     };
   },
+  mounted() {
+    window.dayjs = dayjs;
+  },
 };
 </script>
+
+<style lang="scss">
+.jalali {
+    direction: rtl;
+}
+</style>

@@ -1,30 +1,34 @@
 <template>
   <div
-    :class="['vuec-theme-' + theme]"
-    class="vuec-calendar">
+    :class="['vuec-theme-' + theme, date.$C]"
+    class="vuec-calendar"
+  >
     <div
       v-if="showNavigation"
       class="vuec-nav"
-      align-v="center">
+      align-v="center"
+    >
       <span
         class="vuec-btn-prev"
-        @click="previousPage">
+        @click="previousPage"
+      >
         <slot name="prev-page">
-          <icon-arrow-right />
+          <IconArrowRight />
         </slot>
       </span>
       <span
         class="vuec-btn-next"
-        @click="nextPage">
+        @click="nextPage"
+      >
         <slot name="next-page">
-          <icon-arrow-left />
+          <IconArrowLeft />
         </slot>
       </span>
     </div>
     <div class="vuec-month-wrapper">
-      <vuec-month
-        v-for="(month, index) in months"
-        :key="index"
+      <VuecMonth
+        v-for="(month, monthIndex) in months"
+        :key="monthIndex"
         :adapter="getDayData"
         :title="month.title"
         :date="month.date"
@@ -39,29 +43,29 @@
       >
         <template
           slot="day-of-week"
-          slot-scope="{ name, index, locale }">
+          slot-scope="{ name, index, locale }"
+        >
           <slot
             v-bind="{ name, index, locale }"
-            name="day-of-week">
+            name="day-of-week"
+          >
             {{ name }}
           </slot>
-
         </template>
         <template
           slot="day"
-          slot-scope="props">
-
+          slot-scope="props"
+        >
           <slot
             v-bind="props"
-            name="day">
+            name="day"
+          >
             <div class="vuec-default-day">
               {{ props.date.format('D') }}
             </div>
           </slot>
-
         </template>
-
-      </vuec-month>
+      </VuecMonth>
     </div>
   </div>
 </template>

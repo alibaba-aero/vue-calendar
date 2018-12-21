@@ -10,13 +10,14 @@
       <slot
         :data="data"
         :date="date"
-        name="day">
+        name="day"
+      >
         <div class="vuec-default-day">
           {{ date.format('D') }}
         </div>
       </slot>
     </div>
-    <div class="vuec-square-placeholder"/>
+    <div class="vuec-square-placeholder" />
   </div>
 </template>
 

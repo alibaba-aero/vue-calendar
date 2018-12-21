@@ -1,6 +1,6 @@
 <template>
   <main>
-    <nuxt/>
+    <Nuxt />
   </main>
 </template>
 
@@ -12,7 +12,6 @@ export default {
 
 <style>
 main {
-  direction: rtl;
   margin: 50px;
 }
 </style>

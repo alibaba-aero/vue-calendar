@@ -2,27 +2,30 @@
   <div class="vuec-month">
     <div
       :show="showTitle"
-      class="vuec-month-name">
+      class="vuec-month-name"
+    >
       <h2>{{ title || date.format('MMMM') }}</h2>
     </div>
     <div class="vuec-week-nav vuec-7col">
       <div
         v-for="(name, index) in weekDays"
         :key="index"
-        class="vuec-col">
+        class="vuec-col"
+      >
         <div class="vuec-week-content">
           <slot
             v-bind="{ name, index, locale }"
-            name="day-of-week">
+            name="day-of-week"
+          >
             {{ name }}
           </slot>
         </div>
-        <div class="vuec-week-placeholder"/>
+        <div class="vuec-week-placeholder" />
       </div>
     </div>
     <div class="vuec-month-content">
       <div class="vuec-month-days vuec-7col">
-        <day-view
+        <DayView
           v-for="(day, i) in days"
           :key="day.dayKey"
           :index="i"
@@ -40,24 +43,23 @@
         >
           <template
             slot="day"
-            slot-scope="props">
-
+            slot-scope="props"
+          >
             <slot
               v-bind="props"
-              name="day"/>
-
+              name="day"
+            />
           </template>
-
-        </day-view>
+        </DayView>
       </div>
-      <div class="vuec-month-placeholder"/>
+      <div class="vuec-month-placeholder" />
     </div>
   </div>
 </template>
 
 <script>
 import dayjs from '../../date';
-
+import { rotate } from '../../utils';
 import DayView from './day.vue';
 
 export default {
@@ -99,9 +101,10 @@ export default {
     },
   },
   data() {
+    const startOfWeek = this.date.startOf('week').day();
     return {
       locale: this.date.$locale().name,
-      weekDays: this.date.$locale().weekdays,
+      weekDays: rotate(this.date.$locale().weekdays, startOfWeek),
     };
   },
   computed: {

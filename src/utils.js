@@ -41,3 +41,7 @@ export function toEnglishDigits(value) {
     .replace(/[۰-۹]/g, w => w.charCodeAt(0) - PERSIAN_ZERO_CHAR_CODE)
     .replace(/[٠-٩]/g, w => w.charCodeAt(0) - ARABIC_ZERO_CHAR_CODE);
 }
+
+export function rotate(arr, n) {
+  return arr.slice(n, arr.length).concat(arr.slice(0, n));
+}

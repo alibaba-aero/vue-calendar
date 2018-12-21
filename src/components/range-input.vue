@@ -4,10 +4,14 @@
       class="vuec-date-inputs"
       @click="showPicker"
     >
-      <div class="input">{{ formattedDates[0] }}</div>
-      <div class="input">{{ formattedDates[1] }}</div>
+      <div class="input">
+        {{ formattedDates[0] }}
+      </div>
+      <div class="input">
+        {{ formattedDates[1] }}
+      </div>
     </div>
-    <transition name="popup-animation">
+    <Transition name="popup-animation">
       <div
         v-if="visible"
         :class="{ mobile: mobile }"
@@ -16,26 +20,29 @@
       >
         <div
           v-if="mobile"
-          class="vuec-popup-header">
+          class="vuec-popup-header"
+        >
           <slot name="title">
             تاریخ ورود و خروج
           </slot>
           <div
             class="vuec-popup-close"
-            @click="showPicker(false)">
-            <icon-close/>
+            @click="showPicker(false)"
+          >
+            <IconClose />
           </div>
         </div>
-        <vuec-select-range
+        <VuecSelectRange
           :theme="theme"
           :value="dates"
+          :date="date"
           :min-date="minDate"
           :max-date="maxDate"
           :visible-months="2"
           :selectable="true"
         />
       </div>
-    </transition>
+    </Transition>
   </div>
 </template>
 
@@ -65,6 +72,10 @@ export default {
     selectionMode: {
       type: String,
       default: 'single',
+    },
+    date: {
+      type: Object,
+      default: () => dayjs(),
     },
     data: {
       type: Object,
@@ -96,7 +107,7 @@ export default {
     },
   },
   data() {
-    const [fromDate = dayjs(), toDate = dayjs()] = this.value;
+    const [fromDate = this.date, toDate = this.date] = this.value;
     return {
       visible: this.open,
       temporaryDisableClickListen: false,
@@ -163,12 +174,10 @@ export default {
         box-shadow: 0 15px 12px rgba(0,0,0,0.22), 0 0 38px rgba(0,0,0,0.30);
         border-radius: 4PX;
         padding: 16px;
-        direction: rtl;
         position: relative;
         z-index: 10;
         position: absolute;
         top: 100%;
-        right: 0;
     }
     .vuec-popup-header {
       padding: 10px 20px;
@@ -199,6 +208,7 @@ export default {
         width: 300px;
         .input {
             flex: 1;
+            padding: 16px;
         }
     }
     .mobile {

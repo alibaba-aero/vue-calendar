@@ -4,15 +4,19 @@
       class="vuec-date-inputs"
       @click="showPicker"
     >
-      <div class="input">{{ formattedDates[0] }}</div>
-      <div class="input">{{ formattedDates[1] }}</div>
+      <div class="input">
+        {{ formattedDates[0] }}
+      </div>
+      <div class="input">
+        {{ formattedDates[1] }}
+      </div>
     </div>
     <div
       v-show="visible"
       class="vuec-popup"
       @click="onClickDelegate"
     >
-      <vuec-single-select
+      <VuecSingleSelect
         :theme="theme"
         :value="dates"
         :visible-months="1"
