@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.1"></a>
+## [0.5.1](https://github.com/alibaba-aero/vue-calendar/compare/v0.5.0...v0.5.1) (2019-01-08)
+
+
+### Bug Fixes
+
+* clear click event, optimize month render ([bb24ea6](https://github.com/alibaba-aero/vue-calendar/commit/bb24ea6))
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/alibaba-aero/vue-calendar/compare/v0.4.1...v0.5.0) (2018-12-21)
 
