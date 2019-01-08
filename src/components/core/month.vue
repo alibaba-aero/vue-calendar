@@ -1,60 +1,60 @@
 <template>
-  <div class="vuec-month">
-    <div
-      :show="showTitle"
-      class="vuec-month-name"
-    >
-      <h2>{{ title || date.format('MMMM') }}</h2>
-    </div>
-    <div class="vuec-week-nav vuec-7col">
-      <div
-        v-for="(name, index) in weekDays"
-        :key="index"
-        class="vuec-col"
-      >
-        <div class="vuec-week-content">
-          <slot
-            v-bind="{ name, index, locale }"
-            name="day-of-week"
-          >
-            {{ name }}
-          </slot>
-        </div>
-        <div class="vuec-week-placeholder" />
-      </div>
-    </div>
-    <div class="vuec-month-content">
-      <div class="vuec-month-days vuec-7col">
-        <DayView
-          v-for="(day, i) in days"
-          :key="day.dayKey"
-          :index="i"
-          :data="day.data"
-          :date="day.date"
-          :title="day.title"
-          :aria-hidden="day.hide"
-          :disabled="day.disabled"
-          :selectable="!day.disabled && selectable"
-          :selected="day.selected"
-          class="vuec-col"
-          @click="toggleDay"
-          @hover="$emit('hover', $event)"
-          @blur="$emit('blur', $event)"
+    <div class="vuec-month">
+        <div
+            :show="showTitle"
+            class="vuec-month-name"
         >
-          <template
-            slot="day"
-            slot-scope="props"
-          >
-            <slot
-              v-bind="props"
-              name="day"
-            />
-          </template>
-        </DayView>
-      </div>
-      <div class="vuec-month-placeholder" />
+            <h2>{{ title || date.format('MMMM') }}</h2>
+        </div>
+        <div class="vuec-week-nav vuec-7col">
+            <div
+                v-for="(name, index) in weekDays"
+                :key="index"
+                class="vuec-col"
+            >
+                <div class="vuec-week-content">
+                    <slot
+                        v-bind="{ name, index, locale }"
+                        name="day-of-week"
+                    >
+                        {{ name }}
+                    </slot>
+                </div>
+                <div class="vuec-week-placeholder" />
+            </div>
+        </div>
+        <div class="vuec-month-content">
+            <div class="vuec-month-days vuec-7col">
+                <DayView
+                    v-for="day in days"
+                    :key="day.key"
+                    :index="day.key"
+                    :data="day.data"
+                    :date="day.date"
+                    :title="day.title"
+                    :aria-hidden="day.hide"
+                    :disabled="day.disabled"
+                    :selectable="!day.disabled && selectable"
+                    :selected="day.selected"
+                    class="vuec-col"
+                    @click="$emit('click-day', $event)"
+                    @hover="$emit('hover', $event)"
+                    @blur="$emit('blur', $event)"
+                >
+                    <template
+                        slot="day"
+                        slot-scope="props"
+                    >
+                        <slot
+                            v-bind="props"
+                            name="day"
+                        />
+                    </template>
+                </DayView>
+            </div>
+            <div class="vuec-month-placeholder" />
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -63,107 +63,135 @@ import { rotate } from '../../utils';
 import DayView from './day.vue';
 
 export default {
-  components: {
-    DayView,
-  },
-  props: {
-    date: {
-      type: Object,
-      required: true,
+    components: {
+        DayView,
     },
-    adapter: {
-      type: Function,
-      default: () => ({}),
+    props: {
+        date: {
+            type: Object,
+            required: true,
+        },
+        adapter: {
+            type: Function,
+            default: () => ({}),
+        },
+        selectable: {
+            type: Boolean,
+            default: false,
+        },
+        minDate: {
+            type: [Object, String],
+            default: null,
+        },
+        maxDate: {
+            type: [Object, String],
+            default: null,
+        },
+        selection: {
+            type: Array,
+            default: () => [],
+        },
+        showTitle: {
+            type: Boolean,
+            default: true,
+        },
+        title: {
+            type: String,
+            default: '',
+        },
+        dateUnderCursor: {
+            type: Object,
+            default: null,
+        },
     },
-    selectable: {
-      type: Boolean,
-      default: false,
+    data() {
+        const startOfWeek = this.date.startOf('week').day();
+        return {
+            locale: this.date.$locale().name,
+            weekDays: rotate(this.date.$locale().weekdays, startOfWeek),
+            days: this.getDaysOfMonthArray(this.date),
+        };
     },
-    minDate: {
-      type: [Object, String],
-      default: null,
+    computed: {
+        propsToTriggerRecreateDays() {
+            // it's only required to reference those properties
+            this.date; // eslint-disable-line
+            this.minDate; // eslint-disable-line
+            this.maxDate; // eslint-disable-line
+            this.selection; // eslint-disable-line
+            this.adapter; // eslint-disable-line
+            // and then return a different value every time
+            return Date.now(); // or performance.now()
+        },
+        propsToTriggerDataReaload() {
+            // it's only required to reference those properties
+            this.dateUnderCursor; // eslint-disable-line
+            // and then return a different value every time
+            return Date.now(); // or performance.now()
+        },
     },
-    maxDate: {
-      type: [Object, String],
-      default: null,
+    watch: {
+        propsToTriggerRecreateDays() {
+            this.days = this.getDaysOfMonthArray(this.date);
+        },
+        propsToTriggerDataReaload() {
+            this.days.forEach((day) => {
+                const $day = day;
+                $day.data = this.adapter({
+                    date: day.date,
+                    dayKey: day.key,
+                    monthKey: day.date.format('YYYY/MM'),
+                });
+            });
+        },
     },
-    selection: {
-      type: Array,
-      default: () => [],
-    },
-    showTitle: {
-      type: Boolean,
-      default: true,
-    },
-    title: {
-      type: String,
-      default: '',
-    },
-  },
-  data() {
-    const startOfWeek = this.date.startOf('week').day();
-    return {
-      locale: this.date.$locale().name,
-      weekDays: rotate(this.date.$locale().weekdays, startOfWeek),
-    };
-  },
-  computed: {
-    days() {
-      const activeMonth = this.date.month();
-      const monthKey = this.date.format('YYYY/MM');
-      // move to start of week if it's not
-      let date = dayjs(this.date).startOf('Month').startOf('week');
-      const end = dayjs(this.date).endOf('Month').endOf('week');
+    methods: {
+        getDaysOfMonthArray($date) {
+            const activeMonth = $date.month();
+            const monthKey = $date.format('YYYY/MM');
+            // move to start of week if it's not
+            let date = $date.startOf('Month').startOf('week');
+            const end = $date.endOf('Month').endOf('week');
 
-      const days = [];
+            const days = [];
 
-      const minDate = this.minDate ? dayjs(this.minDate).startOf('day') : null;
-      const maxDate = this.maxDate ? dayjs(this.maxDate).endOf('day') : null;
+            const minDate = this.minDate ? dayjs(this.minDate).startOf('day') : null;
+            const maxDate = this.maxDate ? dayjs(this.maxDate).endOf('day') : null;
 
-      while (date.isBefore(end)) {
-        const dayKey = date.format('YYYY/MM/DD');
-        if ((minDate && date.isBefore(minDate))
+            while (date.isBefore(end)) {
+                const dayKey = date.format('YYYY/MM/DD');
+                if ((minDate && date.isBefore(minDate))
                     || (maxDate && date.isAfter(maxDate))
                     || (date.month() !== activeMonth)) {
-          days.push({
-            disabled: true,
-            hide: date.month() !== activeMonth,
-            date: dayjs(date),
-            data: this.adapter({
-              date,
-              dayKey,
-              monthKey,
-            }) || {},
-          });
-        } else {
-          days.push({
-            key: dayKey,
-            data: this.adapter({
-              date,
-              dayKey,
-              monthKey,
-            }) || {},
-            date: dayjs(date),
-            selected: this.selection.indexOf(dayKey) !== -1,
-          });
-        }
+                    days.push({
+                        key: dayKey,
+                        disabled: true,
+                        hide: date.month() !== activeMonth,
+                        date: dayjs(date),
+                        data: this.adapter({
+                            date,
+                            dayKey,
+                            monthKey,
+                        }) || {},
+                    });
+                } else {
+                    days.push({
+                        key: dayKey,
+                        data: this.adapter({
+                            date,
+                            dayKey,
+                            monthKey,
+                        }) || {},
+                        date: dayjs(date),
+                        selected: this.selection.indexOf(dayKey) !== -1,
+                    });
+                }
 
-        date = date.add(1, 'days');
-      }
-
-      return days;
+                date = date.add(1, 'days');
+            }
+            return days;
+        },
     },
-  },
-  methods: {
-    toggleDay(index) {
-      const day = this.days[index];
-      this.$emit('selectionChange', {
-        key: day.key,
-        date: day.date,
-        selected: !day.selected,
-      });
-    },
-  },
 };
 </script>
 

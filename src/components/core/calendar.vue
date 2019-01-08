@@ -1,73 +1,74 @@
 <template>
-  <div
-    :class="['vuec-theme-' + theme, date.$C]"
-    class="vuec-calendar"
-  >
     <div
-      v-if="showNavigation"
-      class="vuec-nav"
-      align-v="center"
+        :class="['vuec-theme-' + theme, date.$C]"
+        class="vuec-calendar"
     >
-      <span
-        class="vuec-btn-prev"
-        @click="previousPage"
-      >
-        <slot name="prev-page">
-          <IconArrowRight />
-        </slot>
-      </span>
-      <span
-        class="vuec-btn-next"
-        @click="nextPage"
-      >
-        <slot name="next-page">
-          <IconArrowLeft />
-        </slot>
-      </span>
-    </div>
-    <div class="vuec-month-wrapper">
-      <VuecMonth
-        v-for="(month, monthIndex) in months"
-        :key="monthIndex"
-        :adapter="getDayData"
-        :title="month.title"
-        :date="month.date"
-        :min-date="minDate"
-        :max-date="maxDate"
-        :selectable="selectable"
-        :inventory="month.inventory"
-        :selection="month.selections"
-        @selectionChange="selectionChange"
-        @hover="onHover"
-        @blur="onBlur"
-      >
-        <template
-          slot="day-of-week"
-          slot-scope="{ name, index, locale }"
+        <div
+            v-if="showNavigation"
+            class="vuec-nav"
+            align-v="center"
         >
-          <slot
-            v-bind="{ name, index, locale }"
-            name="day-of-week"
-          >
-            {{ name }}
-          </slot>
-        </template>
-        <template
-          slot="day"
-          slot-scope="props"
-        >
-          <slot
-            v-bind="props"
-            name="day"
-          >
-            <div class="vuec-default-day">
-              {{ props.date.format('D') }}
-            </div>
-          </slot>
-        </template>
-      </VuecMonth>
+            <span
+                class="vuec-btn-prev"
+                @click="previousPage"
+            >
+                <slot name="prev-page">
+                    <IconArrowRight />
+                </slot>
+            </span>
+            <span
+                class="vuec-btn-next"
+                @click="nextPage"
+            >
+                <slot name="next-page">
+                    <IconArrowLeft />
+                </slot>
+            </span>
+        </div>
+        <div class="vuec-month-wrapper">
+            <VuecMonth
+                v-for="(month, monthIndex) in months"
+                :key="monthIndex"
+                :adapter="getDayData"
+                :title="month.title"
+                :date="month.date"
+                :min-date="minDate"
+                :max-date="maxDate"
+                :selectable="selectable"
+                :inventory="month.inventory"
+                :selection="month.selections"
+                :date-under-cursor="dateUnderCursor"
+                @click-day="onDayClick"
+                @hover="onHover"
+                @blur="onBlur"
+            >
+                <template
+                    slot="day-of-week"
+                    slot-scope="{ name, index, locale }"
+                >
+                    <slot
+                        v-bind="{ name, index, locale }"
+                        name="day-of-week"
+                    >
+                        {{ name }}
+                    </slot>
+                </template>
+                <template
+                    slot="day"
+                    slot-scope="props"
+                >
+                    <slot
+                        v-bind="props"
+                        name="day"
+                    >
+                        <div class="vuec-default-day">
+                            {{ props.date.format('D') }}
+                        </div>
+                    </slot>
+                </template>
+            </VuecMonth>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -78,133 +79,132 @@ import IconArrowLeft from '../icons/arrow-left.vue';
 import IconArrowRight from '../icons/arrow-right.vue';
 
 export default {
-  components: {
-    VuecMonth,
-    IconArrowLeft,
-    IconArrowRight,
-  },
-  props: {
-    theme: {
-      type: String,
-      default: 'default',
+    components: {
+        VuecMonth,
+        IconArrowLeft,
+        IconArrowRight,
     },
-    showPreviousWeeks: {
-      type: Boolean,
-      default: true,
+    props: {
+        theme: {
+            type: String,
+            default: 'default',
+        },
+        showPreviousWeeks: {
+            type: Boolean,
+            default: true,
+        },
+        showNavigation: {
+            type: Boolean,
+            default: true,
+        },
+        selectable: {
+            type: Boolean,
+            default: false,
+        },
+        date: {
+            type: Object,
+            default: () => dayjs(),
+        },
+        visibleMonths: {
+            type: Number,
+            default: 1,
+        },
+        data: {
+            type: Object,
+            default: () => ({}),
+        },
+        minDate: {
+            type: [Object, String],
+            default: null,
+        },
+        maxDate: {
+            type: [Object, String],
+            default: null,
+        },
+        selections: {
+            type: Array,
+            default: () => [],
+        },
+        monthTitleFormat: {
+            type: String,
+            default: 'MMMM',
+        },
     },
-    showNavigation: {
-      type: Boolean,
-      default: true,
+    data() {
+        return {
+            localDate: this.date,
+            dateUnderCursor: null,
+        };
     },
-    selectable: {
-      type: Boolean,
-      default: false,
-    },
-    date: {
-      type: Object,
-      default: () => dayjs(),
-    },
-    visibleMonths: {
-      type: Number,
-      default: 1,
-    },
-    data: {
-      type: Object,
-      default: () => ({}),
-    },
-    minDate: {
-      type: [Object, String],
-      default: null,
-    },
-    maxDate: {
-      type: [Object, String],
-      default: null,
-    },
-    selections: {
-      type: Array,
-      default: () => [],
-    },
-    monthTitleFormat: {
-      type: String,
-      default: 'MMMM',
-    },
-  },
-  data() {
-    return {
-      localDate: this.date,
-      dateUnderCursor: null,
-    };
-  },
-  computed: {
-    monthSelections() {
-      const map = {};
+    computed: {
+        monthSelections() {
+            const map = {};
 
-      this.selections.forEach((item) => {
-        const month = dayjs(item, 'YYYY/MM/DD').format('YYYY/MM');
-        map[month] = map[month] || [];
-        map[month].push(item);
-        return map;
-      });
+            this.selections.forEach((item) => {
+                const month = dayjs(item, 'YYYY/MM/DD').format('YYYY/MM');
+                map[month] = map[month] || [];
+                map[month].push(item);
+                return map;
+            });
 
-      return map;
-    },
-    months() {
-      const months = [];
+            return map;
+        },
+        months() {
+            const months = [];
 
-      let date = dayjs(this.localDate);
+            let date = dayjs(this.localDate);
 
-      if (this.showPreviousWeeks) {
-        date.startOf('Month');
-      }
+            if (this.showPreviousWeeks) {
+                date.startOf('Month');
+            }
+            let index = 0;
+            while (index < this.visibleMonths) {
+                const monthKey = date.format('YYYY/MM');
 
-      let index = 0;
-      while (index < this.visibleMonths) {
-        const monthKey = date.format('YYYY/MM');
+                months.push({
+                    title: date.format(this.monthTitleFormat),
+                    date: dayjs(date),
+                    selections: this.monthSelections[monthKey],
+                });
 
-        months.push({
-          title: date.format(this.monthTitleFormat),
-          date: dayjs(date),
-          selections: this.monthSelections[monthKey],
-        });
+                date = date.add(1, 'Month').startOf('Month');
+                index += 1;
+            }
 
-        date = date.add(1, 'Month').startOf('Month');
-        index += 1;
-      }
-
-      return months;
+            return months;
+        },
     },
-  },
-  watch: {
-    date(newDate) {
-      this.localDate = newDate;
+    watch: {
+        date(newDate) {
+            this.localDate = newDate;
+        },
     },
-  },
-  methods: {
-    onHover(date) {
-      if (!date.isSame(this.dateUnderCursor)) {
-        this.dateUnderCursor = date;
-      }
+    methods: {
+        onHover(date) {
+            if (!date.isSame(this.dateUnderCursor)) {
+                this.dateUnderCursor = date;
+            }
+        },
+        onBlur(date) {
+            if (date === null) {
+                this.dateUnderCursor = null;
+            }
+        },
+        getDayData({ dayKey, monthKey }) {
+            return (this.data[monthKey] || {})[dayKey] || {};
+        },
+        onDayClick($event) {
+            this.$emit('click-day', $event);
+        },
+        previousPage() {
+            this.localDate = this.localDate.subtract(this.visibleMonths, 'Month').startOf('Month');
+            this.$emit('previous-page', this.localDate);
+        },
+        nextPage() {
+            this.localDate = this.localDate.add(this.visibleMonths, 'Month').startOf('Month');
+            this.$emit('next-page', this.localDate);
+        },
     },
-    onBlur(date) {
-      if (date === null) {
-        this.dateUnderCursor = null;
-      }
-    },
-    getDayData({ dayKey, monthKey }) {
-      return (this.data[monthKey] || {})[dayKey] || {};
-    },
-    selectionChange({ date, selected }) {
-      this.$emit('selectionChange', { date, selected });
-    },
-    previousPage() {
-      this.localDate = this.localDate.subtract(this.visibleMonths, 'Month').startOf('Month');
-      this.$emit('previous-page', this.localDate);
-    },
-    nextPage() {
-      this.localDate = this.localDate.add(this.visibleMonths, 'Month').startOf('Month');
-      this.$emit('next-page', this.localDate);
-    },
-  },
 };
 </script>
 

@@ -1,142 +1,142 @@
 <template>
-  <div class="vuec-range-input">
-    <div
-      class="vuec-date-inputs"
-      @click="showPicker"
-    >
-      <div class="input">
-        {{ formattedDates[0] }}
-      </div>
-      <div class="input">
-        {{ formattedDates[1] }}
-      </div>
+    <div class="vuec-single-input">
+        <div
+            class="vuec-date-inputs"
+            @click="showPicker"
+        >
+            <div class="input">
+                {{ formattedDate }}
+            </div>
+        </div>
+        <div
+            v-show="visible"
+            class="vuec-popup"
+            @click="onClickDelegate"
+        >
+            <VuecSelectSingle
+                :theme="theme"
+                :date="date"
+                :value="selection"
+                :visible-months="visibleMonths"
+                :selectable="true"
+                :min-date="minDate"
+                :max-date="maxDate"
+                @input="onSelectionChange"
+            />
+        </div>
     </div>
-    <div
-      v-show="visible"
-      class="vuec-popup"
-      @click="onClickDelegate"
-    >
-      <VuecSingleSelect
-        :theme="theme"
-        :value="dates"
-        :visible-months="1"
-        :selectable="true"
-      />
-    </div>
-  </div>
 </template>
 
 <script>
-import VuecSingleSelect from './select-single.vue';
+import VuecSelectSingle from './select-single.vue';
 import dayjs from '../date';
 
 export default {
-  components: {
-    VuecSingleSelect,
-  },
-  props: {
-    theme: {
-      type: String,
-      default: 'default',
+    components: {
+        VuecSelectSingle,
     },
-    selectable: {
-      type: Boolean,
-      default: false,
+    props: {
+        theme: {
+            type: String,
+            default: 'default',
+        },
+        selectable: {
+            type: Boolean,
+            default: false,
+        },
+        selectionMode: {
+            type: String,
+            default: 'single',
+        },
+        data: {
+            type: Object,
+            default: () => ({}),
+        },
+        date: {
+            type: [Object, String],
+            default: undefined,
+        },
+        minDate: {
+            type: [Object, String],
+            default: null,
+        },
+        maxDate: {
+            type: [Object, String],
+            default: null,
+        },
+        visibleMonths: {
+            type: Number,
+            default: 1,
+        },
+        value: {
+            type: Object,
+            default: () => ({}),
+        },
+        open: {
+            type: Boolean,
+            default: false,
+        },
     },
-    selectionMode: {
-      type: String,
-      default: 'single',
+    data() {
+        return {
+            visible: this.open,
+            temporaryDisableClickListen: false,
+            selection: undefined,
+        };
     },
-    data: {
-      type: Object,
-      default: () => ({}),
+    computed: {
+        formattedDate() {
+            return this.selection ? this.selection.format('YYYY/MM/DD') : '';
+        },
     },
-    minDate: {
-      type: [Object, String],
-      default: null,
+    watch: {
+        open(newValue) {
+            this.visible = newValue;
+            this.temporaryDisableClickListen = true;
+        },
     },
-    visibleMonths: {
-      type: Number,
-      default: 1,
+    mounted() {
+        document.body.addEventListener('click', this.handleBodyClick);
     },
-    value: {
-      type: Object,
-      default: () => ({}),
+    beforeDestroy() {
+        document.body.removeEventListener('click', this.handleBodyClick);
     },
-    open: {
-      type: Boolean,
-      default: false,
+    methods: {
+        handleBodyClick() {
+            if (this.visible && !this.temporaryDisableClickListen) {
+                this.visible = false;
+                this.$emit('hide');
+            }
+            this.temporaryDisableClickListen = false;
+        },
+        showPicker() {
+            this.temporaryDisableClickListen = true;
+            this.visible = true;
+        },
+        onClickDelegate($event) {
+            $event.stopPropagation();
+        },
+        onSelectionChange({ date }) {
+            this.selection = dayjs(date);
+            this.$emit('input', this.selection);
+            this.visible = false;
+        },
     },
-  },
-  data() {
-    return {
-      visible: this.open,
-      temporaryDisableClickListen: false,
-      fromDate: dayjs(),
-      toDate: dayjs(),
-      dates: [],
-    };
-  },
-  computed: {
-    formattedDates() {
-      return this.dates.map(date => date.format('YYYY/MM/DD'));
-    },
-  },
-  watch: {
-    open(newValue) {
-      this.visible = newValue;
-      this.temporaryDisableClickListen = true;
-    },
-  },
-  mounted() {
-    document.body.addEventListener('click', this.handleBodyClick);
-  },
-  beforeDestroy() {
-    document.body.removeEventListener('click', this.handleBodyClick);
-  },
-  methods: {
-    handleBodyClick() {
-      if (this.visible && !this.temporaryDisableClickListen) {
-        this.visible = false;
-        this.$emit('hide');
-      }
-      this.temporaryDisableClickListen = false;
-    },
-    showPicker() {
-      this.temporaryDisableClickListen = true;
-      this.visible = true;
-    },
-    onClickDelegate($event) {
-      $event.stopPropagation();
-    },
-    onSelectionChange(selections) {
-      this.fromDate = dayjs(selections[0], 'YYYY/MM/DD');
-      this.toDate = dayjs(selections[selections.length - 1], 'YYYY/MM/DD');
-      this.$emit('input', [
-        this.fromDate,
-        this.toDate,
-      ]);
-    },
-  },
-
 };
 </script>
 
 <style lang="scss">
-.vuec-calendar.default .vuec-range-input {
+.vuec-single-input {
     .vuec-popup {
         flex-direction: column;
-        width: 600px;
+        width: 400px;
         background: #fff;
         box-shadow: 0 15px 12px rgba(0,0,0,0.22), 0 0 38px rgba(0,0,0,0.30);
-
         border-radius: 4PX;
-
         padding: 16px;
-
         direction: rtl;
-
-        position: relative;
+        position: absolute;
+        z-index: 99;
     }
     .vuec-date-inputs {
         align-items: center;

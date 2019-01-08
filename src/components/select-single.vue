@@ -1,60 +1,58 @@
 <script>
 import VuecCalendar from './core/calendar.vue';
+import dayjs from '../date';
 
 export default {
-  extends: VuecCalendar,
-  props: {
-    value: {
-      type: Array,
-      default: () => ([]),
-    },
-  },
-  data() {
-    return {
-      localSelection: this.value,
-    };
-  },
-  computed: {
-    monthSelections() {
-      const map = {};
-
-      this.localSelection.forEach((item) => {
-        const month = item.format('YYYY/MM');
-        map[month] = map[month] || [];
-        map[month].push(item);
-      });
-
-      return map;
-    },
-  },
-  watch: {
-    value(newValue) {
-      this.localSelection = newValue;
-    },
-  },
-  methods: {
-    getDayData({ dayKey, monthKey, date }) {
-      const data = (this.data[monthKey] || {})[dayKey] || {};
-      const isSelected = this.localSelection.length > 0 && date.isSame(this.localSelection[0], 'day');
-      return Object.assign({}, data, {
-        class: {
-          hover: this.dateUnderCursor && date.isSame(this.dateUnderCursor),
-          start: isSelected,
-          end: isSelected,
+    extends: VuecCalendar,
+    props: {
+        value: {
+            type: Object,
+            default: null,
         },
-      });
     },
-    onHover(date) {
-      if (this.dateUnderCursor !== date) {
-        this.dateUnderCursor = date;
-      }
+    data() {
+        return {
+            localSelection: this.value ? dayjs(this.value) : null,
+        };
     },
-    selectionChange({ date }) {
-      this.localSelection.length = 0;
-      this.localSelection.push(date);
-      this.$emit('input', this.localSelection);
+    computed: {
+        monthSelections() {
+            const map = {};
+            if (this.localSelection) {
+                const month = this.localSelection.format('YYYY/MM');
+                map[month] = map[month] || [];
+                map[month].push(this.localSelection);
+            }
+            return map;
+        },
     },
-  },
+    watch: {
+        value(newValue) {
+            this.localSelection = newValue ? dayjs(newValue) : null;
+        },
+    },
+    methods: {
+        getDayData({ dayKey, monthKey, date }) {
+            const data = (this.data[monthKey] || {})[dayKey] || {};
+            const isSelected = this.localSelection && date.isSame(this.localSelection, 'day');
+            return Object.assign({}, data, {
+                class: {
+                    hover: this.dateUnderCursor && date.isSame(this.dateUnderCursor),
+                    start: isSelected,
+                    end: isSelected,
+                },
+            });
+        },
+        onHover(date) {
+            if (this.dateUnderCursor !== date) {
+                this.dateUnderCursor = date;
+            }
+        },
+        onDayClick(selection) {
+            this.localSelection = selection.date;
+            this.$emit('input', selection);
+        },
+    },
 };
 </script>
 

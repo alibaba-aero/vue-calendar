@@ -1,61 +1,67 @@
 <template>
-  <div
-    :class="[data.class, { disabled, selected, selectable }]"
-    class="vuec-day"
-    @mouseover="$emit('hover', date)"
-    @mouseout="$emit('blur', date)"
-    @click="onClick"
-  >
-    <div class="vuec-day-content">
-      <slot
-        :data="data"
-        :date="date"
-        name="day"
-      >
-        <div class="vuec-default-day">
-          {{ date.format('D') }}
+    <div
+        :class="[data.class, { disabled, selected, selectable }]"
+        class="vuec-day"
+        @mouseover="$emit('hover', date)"
+        @mouseout="$emit('blur', date)"
+        @click="onClick"
+    >
+        <div class="vuec-day-content">
+            <slot
+                :data="data"
+                :date="date"
+                name="day"
+            >
+                <div class="vuec-default-day">
+                    {{ date.format('D') }}
+                </div>
+            </slot>
         </div>
-      </slot>
+        <div class="vuec-square-placeholder" />
     </div>
-    <div class="vuec-square-placeholder" />
-  </div>
 </template>
 
 <script>
 export default {
-  props: {
-    index: {
-      type: Number,
-      required: true,
+    props: {
+        index: {
+            type: String,
+            required: true,
+        },
+        date: {
+            type: Object,
+            default: null,
+        },
+        data: {
+            type: Object,
+            default: () => ({}),
+        },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
+        selected: {
+            type: Boolean,
+            default: false,
+        },
+        selectable: {
+            type: Boolean,
+            default: false,
+        },
     },
-    date: {
-      type: Object,
-      default: null,
+    methods: {
+        onClick() {
+            if (this.selectable) {
+                this.$emit('click', {
+                    key: this.index,
+                    date: this.date,
+                    data: this.data,
+                    selected: this.selected,
+                    selectable: this.selectable,
+                });
+            }
+        },
     },
-    data: {
-      type: Object,
-      default: () => ({}),
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    selected: {
-      type: Boolean,
-      default: false,
-    },
-    selectable: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  methods: {
-    onClick() {
-      if (this.selectable) {
-        this.$emit('click', this.index);
-      }
-    },
-  },
 };
 </script>
 
