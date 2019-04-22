@@ -30,7 +30,6 @@
                 v-for="(month, monthIndex) in months"
                 :key="monthIndex"
                 :adapter="getDayData"
-                :title="month.title"
                 :date="month.date"
                 :min-date="minDate"
                 :max-date="maxDate"
@@ -64,6 +63,13 @@
                         <div class="vuec-default-day">
                             {{ props.date.format('D') }}
                         </div>
+                    </slot>
+                </template>
+                <template
+                    slot="month-title"
+                    slot-scope="scope">
+                    <slot name="month-title" v-bind="scope">
+                        <h2>{{ scope.date.format('MMMM') }}</h2>
                     </slot>
                 </template>
             </VuecMonth>
@@ -125,10 +131,6 @@ export default {
             type: Array,
             default: () => [],
         },
-        monthTitleFormat: {
-            type: String,
-            default: 'MMMM',
-        },
     },
     data() {
         return {
@@ -162,7 +164,6 @@ export default {
                 const monthKey = date.format('YYYY/MM');
 
                 months.push({
-                    title: date.format(this.monthTitleFormat),
                     date: dayjs(date),
                     selections: this.monthSelections[monthKey],
                 });

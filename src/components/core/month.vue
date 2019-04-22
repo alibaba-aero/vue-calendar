@@ -4,7 +4,7 @@
             :show="showTitle"
             class="vuec-month-name"
         >
-            <h2>{{ title || date.format('MMMM') }}</h2>
+            <slot name="month-title" :date="date" />
         </div>
         <div class="vuec-week-nav vuec-7col">
             <div
@@ -94,10 +94,6 @@ export default {
         showTitle: {
             type: Boolean,
             default: true,
-        },
-        title: {
-            type: String,
-            default: '',
         },
         dateUnderCursor: {
             type: Object,
