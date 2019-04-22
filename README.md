@@ -38,7 +38,7 @@ export default {
 - `selection-mode`: String - single
 - `value`: Object - {}
 - `open`: Boolean - false
-- `format`: String - jYYYY/jM/jD
+- `format`: String - YYYY/M/D
 
 ### calendar
 
