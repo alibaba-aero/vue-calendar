@@ -19,8 +19,8 @@
     "dist"
   ],
   "dependencies": {
-    "dayjs": "^1.7.7",
-    "jalaliday": "^2.0.1"
+    "dayjs": "^1.8.12",
+    "jalaliday": "^2.2.2"
   },
   "devDependencies": {
     "bili": "^3.1.2",
