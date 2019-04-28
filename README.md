@@ -1,7 +1,7 @@
 # Vue Calendar
 
 [![npm (scoped with tag)](https://img.shields.io/npm/v/@alibaba-aero/vue-calendar/latest.svg?style=flat-square)](https://npmjs.com/package/@alibaba-aero/vue-calendar)
-[![npm](https://img.shields.io/npm/dt/@alibaba-aero/vue-calendar?style=flat-square)](https://npmjs.com/package/@alibaba-aero/vue-calendar)
+[![npm](https://img.shields.io/npm/dt/@alibaba-aero/vue-calendar.svg?style=flat-square)](https://npmjs.com/package/@alibaba-aero/vue-calendar)
 
 ## Installation
 ```
