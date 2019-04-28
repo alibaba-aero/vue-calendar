@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/alibaba-aero/vue-calendar/compare/v0.5.1...v0.6.0) (2019-04-28)
+
+
+### Features
+
+* month name as slot ([f4b039c](https://github.com/alibaba-aero/vue-calendar/commit/f4b039c))
+
+
+* Merge pull request #2 from SasanFarrokh/master ([cab477e](https://github.com/alibaba-aero/vue-calendar/commit/cab477e)), closes [#2](https://github.com/alibaba-aero/vue-calendar/issues/2)
+
+
+### BREAKING CHANGES
+
+* remove monthTitleFormat and introduce named slot month-title
+
+
+
 <a name="0.5.1"></a>
 ## [0.5.1](https://github.com/alibaba-aero/vue-calendar/compare/v0.5.0...v0.5.1) (2019-01-08)
 
