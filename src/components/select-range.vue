@@ -39,13 +39,16 @@ export default {
             const end = this.localSelection[1] || this.dateUnderCursor;
 
             return Object.assign({}, data, {
-                class: {
-                    hover: this.dateUnderCursor && date.isSame(this.dateUnderCursor),
-                    start: this.localSelection.length > 0 && date.isSame(start, 'day'),
-                    end: this.localSelection.length > 1 && date.isSame(end, 'day'),
-                    selected: this.localSelection.length > 1 && date.isBetween(start, end, 'days', '[]'),
-                    highlight: this.dateUnderCursor && this.localSelection.length === 1 && date.isBetween(start, this.dateUnderCursor, 'days', '[]'),
-                },
+                class: [
+                    data.class,
+                    {
+                        hover: this.dateUnderCursor && date.isSame(this.dateUnderCursor),
+                        start: this.localSelection.length > 0 && date.isSame(start, 'day'),
+                        end: this.localSelection.length > 1 && date.isSame(end, 'day'),
+                        selected: this.localSelection.length > 1 && date.isBetween(start, end, 'days', '[]'),
+                        highlight: this.dateUnderCursor && this.localSelection.length === 1 && date.isBetween(start, this.dateUnderCursor, 'days', '[]'),
+                    },
+                ],
             });
         },
         onHover(date) {
