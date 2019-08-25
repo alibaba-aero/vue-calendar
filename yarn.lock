@@ -3268,10 +3268,10 @@ dayjs@^1.7.7:
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.7.8.tgz#05d288f8d4b2140110cc1519cfe317d6f1f11a3c"
   integrity sha512-Gp4Y5KWeSri0QOWGzHQz7VrKDkfEpS92dCLK7P8hYowRFbaym1vj3d6CoHio3apSS4KSi/qb5Edemv26IN5Hfg==
 
-dayjs@^1.8.12, dayjs@^1.8.9:
-  version "1.8.12"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.8.12.tgz#f9610fb9b115aa2fe2a07e742c130df418cee76a"
-  integrity sha512-7keChCzzjU68sYJpk7kEI1Q9qbJyscyiW0STwEhqDFt+2js9pA/BSzmYE4PRxcMMoUMxNeY0TEMZHqV/JBR4OA==
+dayjs@^1.8.15:
+  version "1.8.15"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.8.15.tgz#7121bc04e6a7f2621ed6db566be4a8aaf8c3913e"
+  integrity sha512-HYHCI1nohG52B45vCQg8Re3hNDZbMroWPkhz50yaX7Lu0ATyjGsTdoYZBpjED9ar6chqTx2dmSmM8A51mojnAg==
 
 de-indent@^1.0.2:
   version "1.0.2"
@@ -5552,12 +5552,10 @@ istanbul-reports@^1.5.1:
   dependencies:
     handlebars "^4.0.3"
 
-jalaliday@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/jalaliday/-/jalaliday-2.2.2.tgz#822c11a341fc9ca3bb8e9177e1145746107a5095"
-  integrity sha512-eC9n6xwCrFzkZatbQfHX/LXCU36niOc9S0taPnPziWNkCXR0RZFtQodXXI1T6VDRJzG6F91XE0UDFhFUYjXeQg==
-  dependencies:
-    dayjs "^1.8.9"
+jalaliday@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/jalaliday/-/jalaliday-2.2.3.tgz#c45a82a789128066fb197c9cd439a0d76de47f2b"
+  integrity sha512-oyJTJkMvHc8EWI9mduYW/9ZWvWJh2ievv1kfd6aUG5W8MUpMWQKpNTS1SQ+fAtbUagNjguG52IngVplZF3uwVQ==
 
 jest-changed-files@^23.4.2:
   version "23.4.2"
