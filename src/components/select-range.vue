@@ -29,6 +29,7 @@ export default {
     },
     watch: {
         value(newValue) {
+            this.dateUnderCursor = null;
             this.localSelection = newValue;
         },
     },
