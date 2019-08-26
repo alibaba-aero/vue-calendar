@@ -152,6 +152,9 @@ export default {
             return map;
         },
         months() {
+            // it's only required to reference those properties
+            this.data; // eslint-disable-line
+
             const months = [];
 
             let date = dayjs(this.localDate);

@@ -156,6 +156,11 @@ export default {
 
             while (date.isBefore(end)) {
                 const dayKey = date.format('YYYY/MM/DD');
+                const data = this.adapter({
+                    date,
+                    dayKey,
+                    monthKey,
+                }) || {};
                 if ((minDate && date.isBefore(minDate))
                     || (maxDate && date.isAfter(maxDate))
                     || (date.month() !== activeMonth)) {
@@ -164,20 +169,13 @@ export default {
                         disabled: true,
                         hide: date.month() !== activeMonth,
                         date: dayjs(date),
-                        data: this.adapter({
-                            date,
-                            dayKey,
-                            monthKey,
-                        }) || {},
+                        data,
                     });
                 } else {
                     days.push({
                         key: dayKey,
-                        data: this.adapter({
-                            date,
-                            dayKey,
-                            monthKey,
-                        }) || {},
+                        data,
+                        disabled: data.disabled,
                         date: dayjs(date),
                         selected: this.selection.indexOf(dayKey) !== -1,
                     });
