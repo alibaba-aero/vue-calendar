@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.4"></a>
+## [0.6.4](https://github.com/alibaba-aero/vue-calendar/compare/v0.6.3...v0.6.4) (2019-08-26)
+
+
+### Bug Fixes
+
+* tree shake calendar on data change ([88ad09d](https://github.com/alibaba-aero/vue-calendar/commit/88ad09d))
+
+
+
 <a name="0.6.3"></a>
 ## [0.6.3](https://github.com/alibaba-aero/vue-calendar/compare/v0.6.2...v0.6.3) (2019-08-25)
 
