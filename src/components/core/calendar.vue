@@ -10,6 +10,7 @@
         >
             <span
                 class="vuec-btn-prev"
+                :class="{ disabled: disablePreviousButton }"
                 @click="previousPage"
             >
                 <slot name="prev-page">
@@ -18,6 +19,7 @@
             </span>
             <span
                 class="vuec-btn-next"
+                :class="{ disabled: disableNextButton }"
                 @click="nextPage"
             >
                 <slot name="next-page">
@@ -67,8 +69,12 @@
                 </template>
                 <template
                     slot="month-title"
-                    slot-scope="scope">
-                    <slot name="month-title" v-bind="scope">
+                    slot-scope="scope"
+                >
+                    <slot
+                        name="month-title"
+                        v-bind="scope"
+                    >
                         <h2>{{ scope.date.format('MMMM') }}</h2>
                     </slot>
                 </template>
@@ -131,6 +137,10 @@ export default {
             type: Array,
             default: () => [],
         },
+        limitView: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         return {
@@ -177,6 +187,16 @@ export default {
 
             return months;
         },
+        disablePreviousButton() {
+            return this.limitView
+                && this.minDate
+                && !this.localDate.isAfter(this.minDate, 'month');
+        },
+        disableNextButton() {
+            return this.limitView
+                && this.maxDate
+                && !this.localDate.isBefore(this.maxDate, 'month');
+        },
     },
     watch: {
         date(newDate) {
@@ -201,11 +221,21 @@ export default {
             this.$emit('click-day', $event);
         },
         previousPage() {
+            if (this.disablePreviousButton) {
+                return;
+            }
+
             this.localDate = this.localDate.subtract(this.visibleMonths, 'Month').startOf('Month');
+
             this.$emit('previous-page', this.localDate);
         },
         nextPage() {
+            if (this.disableNextButton) {
+                return;
+            }
+
             this.localDate = this.localDate.add(this.visibleMonths, 'Month').startOf('Month');
+
             this.$emit('next-page', this.localDate);
         },
     },
@@ -234,6 +264,9 @@ export default {
     .vuec-nav-title {
       flex: 1;
       text-align: center;
+    }
+    .disabled {
+        opacity: 0.3;
     }
   }
 }

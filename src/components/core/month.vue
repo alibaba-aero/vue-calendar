@@ -4,7 +4,10 @@
             :show="showTitle"
             class="vuec-month-name"
         >
-            <slot name="month-title" :date="date" />
+            <slot
+                name="month-title"
+                :date="date"
+            />
         </div>
         <div class="vuec-week-nav vuec-7col">
             <div

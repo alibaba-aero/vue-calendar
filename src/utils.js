@@ -2,16 +2,16 @@
  * Persian numeric characters
  */
 export const PERSIAN_DIGITS = [
-  '۰',
-  '۱',
-  '۲',
-  '۳',
-  '۴',
-  '۵',
-  '۶',
-  '۷',
-  '۸',
-  '۹',
+    '۰',
+    '۱',
+    '۲',
+    '۳',
+    '۴',
+    '۵',
+    '۶',
+    '۷',
+    '۸',
+    '۹',
 ];
 
 /**
@@ -29,19 +29,19 @@ export const PERSIAN_ZERO_CHAR_CODE = PERSIAN_DIGITS[0].charCodeAt(0);
 export const ARABIC_ZERO_CHAR_CODE = ARABIC_DIGITS[0].charCodeAt(0);
 
 export function toNumeric(value) {
-  return String(value).replace(/[^-\d]/g, '');
+    return String(value).replace(/[^-\d]/g, '');
 }
 
 export function toPersianDigits(value) {
-  return String(value).replace(/[0-9]/g, w => PERSIAN_DIGITS[parseInt(w)]);
+    return String(value).replace(/[0-9]/g, w => PERSIAN_DIGITS[parseInt(w)]);
 }
 
 export function toEnglishDigits(value) {
-  return String(value)
-    .replace(/[۰-۹]/g, w => w.charCodeAt(0) - PERSIAN_ZERO_CHAR_CODE)
-    .replace(/[٠-٩]/g, w => w.charCodeAt(0) - ARABIC_ZERO_CHAR_CODE);
+    return String(value)
+        .replace(/[۰-۹]/g, w => w.charCodeAt(0) - PERSIAN_ZERO_CHAR_CODE)
+        .replace(/[٠-٩]/g, w => w.charCodeAt(0) - ARABIC_ZERO_CHAR_CODE);
 }
 
 export function rotate(arr, n) {
-  return arr.slice(n, arr.length).concat(arr.slice(0, n));
+    return arr.slice(n, arr.length).concat(arr.slice(0, n));
 }
