@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/alibaba-aero/vue-calendar/compare/v0.6.4...v0.7.0) (2019-08-28)
+
+
+### Features
+
+* introduce limitView - navigate limatation ([80f16e9](https://github.com/alibaba-aero/vue-calendar/commit/80f16e9))
+
+
+
 <a name="0.6.4"></a>
 ## [0.6.4](https://github.com/alibaba-aero/vue-calendar/compare/v0.6.3...v0.6.4) (2019-08-26)
 
