@@ -5552,10 +5552,10 @@ istanbul-reports@^1.5.1:
   dependencies:
     handlebars "^4.0.3"
 
-jalaliday@^2.2.3:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/jalaliday/-/jalaliday-2.2.3.tgz#c45a82a789128066fb197c9cd439a0d76de47f2b"
-  integrity sha512-oyJTJkMvHc8EWI9mduYW/9ZWvWJh2ievv1kfd6aUG5W8MUpMWQKpNTS1SQ+fAtbUagNjguG52IngVplZF3uwVQ==
+jalaliday@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/jalaliday/-/jalaliday-2.2.4.tgz#c9308dea579d442682578552b077319883b7ce30"
+  integrity sha512-MjBp3R8xN66wcosm/OcGXy/GWlYppgr9ItZr10hKdI1NjvbQHi7IcLV+nbJ40T5eShwY88uBTpSQW6tMN8PlfA==
 
 jest-changed-files@^23.4.2:
   version "23.4.2"
