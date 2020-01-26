@@ -19,8 +19,8 @@
     "dist"
   ],
   "dependencies": {
-    "dayjs": "^1.8.15",
-    "jalaliday": "^2.2.4"
+    "dayjs": "^1.8.19",
+    "jalaliday": "^2.2.7"
   },
   "devDependencies": {
     "bili": "^3.1.2",
@@ -32,8 +32,8 @@
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-vue": "^5.0.0",
     "jest": "^23.1.0",
-    "node-sass": "^4.9.2",
-    "nuxt-edge": "^2.4.0-25755415.f1a3ce1a",
+    "node-sass": "^4.13.1",
+    "nuxt-edge": "^2.11.1-26333291.2d104fe",
     "rollup-plugin-postcss": "^1.6.2",
     "rollup-plugin-vue": "4.3.2",
     "sass-loader": "^7.1.0",
