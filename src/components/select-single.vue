@@ -37,11 +37,14 @@ export default {
             const data = (this.data[monthKey] || {})[dayKey] || {};
             const isSelected = this.localSelection && date.isSame(this.localSelection, 'day');
             return Object.assign({}, data, {
-                class: {
-                    hover: this.dateUnderCursor && date.isSame(this.dateUnderCursor),
-                    start: isSelected,
-                    end: isSelected,
-                },
+                class: [
+                    data.class,
+                    {
+                        hover: this.dateUnderCursor && date.isSame(this.dateUnderCursor),
+                        start: isSelected,
+                        end: isSelected,
+                    },
+                ],
             });
         },
         onHover(date) {
