@@ -32,7 +32,7 @@
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-vue": "^5.0.0",
     "jest": "^23.1.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "nuxt-edge": "^2.11.1-26333291.2d104fe",
     "rollup-plugin-postcss": "^1.6.2",
     "rollup-plugin-vue": "4.3.2",
