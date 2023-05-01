@@ -6818,9 +6818,9 @@ istanbul-reports@^1.5.1:
     handlebars "^4.0.3"
 
 jalaliday@^2.2.7:
-  version "2.2.7"
-  resolved "https://registry.yarnpkg.com/jalaliday/-/jalaliday-2.2.7.tgz#c5fdca8bb4b64d7c14dcf07cac27423de51b201d"
-  integrity sha512-7GSj2wyos2kYAdsKYOKwkKtPpP4yMxMxPQMRsfo6we8wQcZGQX3FITUwJTS2uU1f8ojrJHhcnMue0mZHvEVW0A==
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/jalaliday/-/jalaliday-2.3.0.tgz#f986b30e294ab34ac9c8dca22d94bdc37585cf7f"
+  integrity sha512-B/m3TqsRrTFED/HBDqON6rPKe0MpoLxNICZ5uZeZ/scHJUHKQNr1n+wdZSj8MxrY1Bmo05gllZeNEw4beXd2oQ==
 
 jest-changed-files@^23.4.2:
   version "23.4.2"
