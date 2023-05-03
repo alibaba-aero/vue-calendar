@@ -30,7 +30,7 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jest": "^22.1.2",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-vue": "^5.0.0",
+    "eslint-plugin-vue": "^9.0.0",
     "jest": "^23.1.0",
     "node-sass": "^7.0.0",
     "nuxt-edge": "^2.11.1-26333291.2d104fe",
