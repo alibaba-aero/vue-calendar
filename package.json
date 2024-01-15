@@ -36,7 +36,7 @@
     "nuxt-edge": "^2.11.1-26333291.2d104fe",
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-vue": "6.0.0",
-    "sass-loader": "^13.0.0",
+    "sass-loader": "^14.0.0",
     "standard-version": "latest"
   }
 }
