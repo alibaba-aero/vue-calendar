@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.5"></a>
+## [0.7.5](https://github.com/alibaba-aero/vue-calendar/compare/v0.7.4...v0.7.5) (2024-10-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency dayjs to v1.11.10 ([5fb7061](https://github.com/alibaba-aero/vue-calendar/commit/5fb7061))
+* **deps:** update dependency dayjs to v1.11.7 ([f211725](https://github.com/alibaba-aero/vue-calendar/commit/f211725))
+* **deps:** update dependency dayjs to v1.11.8 ([e088ba2](https://github.com/alibaba-aero/vue-calendar/commit/e088ba2))
+* **deps:** update dependency dayjs to v1.11.9 ([055544c](https://github.com/alibaba-aero/vue-calendar/commit/055544c))
+* **deps:** update dependency jalaliday to v2.3.0 ([c3d2747](https://github.com/alibaba-aero/vue-calendar/commit/c3d2747))
+
+
+
 <a name="0.7.4"></a>
 ## [0.7.4](https://github.com/alibaba-aero/vue-calendar/compare/v0.7.3...v0.7.4) (2021-09-14)
 
