@@ -12,8 +12,7 @@
     "lint": "eslint --ext .js,.vue .",
     "build": "cross-env NODE_ENV=production rollup -c",
     "release": "standard-version $* && git push --follow-tags && npm publish",
-    "prepublish": "npm run build",
-    "prepare": "npm run build"
+    "prepublish": "npm run build"
   },
   "files": [
     "src",
