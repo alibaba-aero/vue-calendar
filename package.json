@@ -2,7 +2,7 @@
   "name": "@alibaba-aero/vue-calendar",
   "version": "0.7.4",
   "description": "Vue Calendar",
-  "main": "dist/vue-calendar.cjs.min.js",
+  "main": "dist/vue-calendar.cjs.js",
   "web": "dist/vue-calendar.min.js",
   "module": "dist/vue-calendar.es.js",
   "jsnext:main": "dist/vue-calendar.es.js",
@@ -19,6 +19,7 @@
     "dist"
   ],
   "dependencies": {
+    "@rollup/plugin-commonjs": "^28.0.2",
     "@vue/compiler-sfc": "^3.5.11",
     "dayjs": "^1.8.19",
     "jalaliday": "^2.2.7",
