@@ -2,7 +2,7 @@
   "name": "@alibaba-aero/vue-calendar",
   "version": "0.7.5",
   "description": "Vue Calendar",
-  "main": "dist/vue-calendar.cjs.js",
+  "main": "dist/vue-calendar.cjs.min.js",
   "web": "dist/vue-calendar.min.js",
   "module": "dist/vue-calendar.es.js",
   "jsnext:main": "dist/vue-calendar.es.js",
