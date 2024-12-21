@@ -1,7 +1,6 @@
 // rollup.config.js
 const vue = require('rollup-plugin-vue'); // Vue 2 plugin
 const { terser } = require('rollup-plugin-terser');
-const resolve = require('@rollup/plugin-node-resolve');
 const  commonjs = require('@rollup/plugin-commonjs');
 const postcss = require('rollup-plugin-postcss');
 
@@ -17,7 +16,6 @@ module.exports = {
         {
             file: 'dist/vue-calendar.es.js',
             format: 'es',
-            plugins: [terser()],
         },
         {
             file: 'dist/vue-calendar.min.js',
@@ -28,7 +26,6 @@ module.exports = {
         },
     ],
     plugins: [
-        resolve(),
         commonjs(),
         vue({
             css: false, // Prevent inlining CSS, handled by postcss instead
