@@ -1,6 +1,8 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.7.7](https://github.com/alibaba-aero/vue-calendar/compare/v0.7.6...v0.7.7) (2024-12-21)
 
 <a name="0.7.5"></a>
 ## [0.7.5](https://github.com/alibaba-aero/vue-calendar/compare/v0.7.4...v0.7.5) (2024-10-27)
