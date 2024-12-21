@@ -9,18 +9,22 @@ module.exports = {
     input: 'src/index.js',
     output: [
         {
-            file: 'dist/index.cjs.js',
+            file: 'dist/vue-calendar.cjs.min.js',
             format: 'cjs',
+            sourcemap: true, // Optional: Include a sourcemap
             plugins: [terser()], // Minify the CommonJS output
         },
         {
-            file: 'dist/index.esm.js',
-            format: 'esm',
-            plugins: [terser()], // Minify the ESM output
+            file: 'dist/vue-calendar.es.js',
+            format: 'es',
+            plugins: [terser()],
         },
         {
-            file: 'dist/index.es.js',
-            format: 'es', // Unminified ES module
+            file: 'dist/vue-calendar.min.js',
+            name: 'vue-calendar',
+            format: 'umd',
+            sourcemap: true,
+            plugins: [terser()],
         },
     ],
     plugins: [
@@ -31,7 +35,7 @@ module.exports = {
             compileTemplate: true, // Precompile Vue templates to render functions
         }),
         postcss({
-            extract: true, // Extract CSS into a separate file
+            extract: 'vue-calendar.min.css', // Extract CSS into a separate file
             minimize: true, // Minify the CSS
             sourceMap: true, // Generate source maps for CSS
         }),
