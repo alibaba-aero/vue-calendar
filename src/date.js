@@ -5,4 +5,4 @@ import jalaliday from './jalaliday';
 dayjs.extend(isBetween);
 dayjs.extend(jalaliday);
 
-export { dayjs as default };
+export default dayjs;
