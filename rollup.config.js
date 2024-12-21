@@ -1,7 +1,8 @@
 // rollup.config.js
 const vue = require('rollup-plugin-vue'); // Vue 2 plugin
 const { terser } = require('rollup-plugin-terser');
-const resolve = require('@rollup/plugin-node-resolve')
+const resolve = require('@rollup/plugin-node-resolve');
+const  commonjs = require('@rollup/plugin-commonjs');
 
 module.exports = {
     input: 'src/index.js',
@@ -22,7 +23,8 @@ module.exports = {
         },
     ],
     plugins: [
+        resolve(),
+        commonjs(),
         vue(), // Vue 2 support
-        resolve()
     ],
 };
