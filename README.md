@@ -54,7 +54,7 @@ export default {
 - `show-previous-weeks`: Boolean - true
 - `show-navigation`: Boolean - true
 - `date`: Object - moment()
-- `selections` - Array - []
+- `selections` - Array of `YYYY/MM/DD` strings in the displayed calendar (for example, `['1400/03/29']` for Jalali) - []
 
 ### month
 

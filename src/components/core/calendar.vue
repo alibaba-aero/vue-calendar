@@ -150,13 +150,15 @@ export default {
     },
     computed: {
         monthSelections() {
-            const map = {};
+            const map = Object.create(null);
 
             this.selections.forEach((item) => {
-                const month = dayjs(item, 'YYYY/MM/DD').format('YYYY/MM');
+                // String selections are already day keys in the displayed calendar.
+                const month = typeof item === 'string'
+                    ? item.substring(0, item.lastIndexOf('/'))
+                    : dayjs(item).format('YYYY/MM');
                 map[month] = map[month] || [];
                 map[month].push(item);
-                return map;
             });
 
             return map;
